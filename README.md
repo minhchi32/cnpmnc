@@ -3,3 +3,4 @@ cnpmnc
 
 
 - Trần Hà Tuấn Kiệt - 18DH110808
+- Trần Minh Chí - 18DH110859
