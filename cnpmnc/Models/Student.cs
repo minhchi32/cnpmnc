@@ -12,6 +12,8 @@ namespace cnpmnc.Models
         public string LastName { get; set; }
         public string Email { get; set; }
         public string Gender { get; set; }
-        public string FacultyId { get; set; }
+        public int? FacultyId { get; set; }
+
+        public virtual Faculty Faculty { get; set; }
     }
 }

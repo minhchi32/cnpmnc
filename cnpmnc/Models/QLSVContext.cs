@@ -35,56 +35,37 @@ namespace cnpmnc.Models
 
             modelBuilder.Entity<Faculty>(entity =>
             {
-                entity.HasKey(e=>e.Id);
-
                 entity.ToTable("Faculty");
 
                 entity.Property(e => e.Id)
-                    .UseIdentityColumn();
+                    .ValueGeneratedNever()
+                    .HasColumnName("ID");
 
-                entity.Property(e => e.FacultyName)
-                    .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("faculty_name");
-
-                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.Name).HasMaxLength(100);
             });
 
             modelBuilder.Entity<Student>(entity =>
             {
-                entity.HasKey(e => e.Id);
-
                 entity.ToTable("Student");
 
                 entity.Property(e => e.Id)
-                    .UseIdentityColumn();
+                    .ValueGeneratedNever()
+                    .HasColumnName("ID");
 
-                entity.Property(e => e.Email)
-                    .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("email");
+                entity.Property(e => e.Email).HasMaxLength(100);
 
-                entity.Property(e => e.FacultyId)
-                    .HasMaxLength(2)
-                    .IsUnicode(false)
-                    .HasColumnName("faculty_id");
+                entity.Property(e => e.FacultyId).HasColumnName("FacultyID");
 
-                entity.Property(e => e.FirstName)
-                    .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("first_name");
+                entity.Property(e => e.FirstName).HasMaxLength(100);
 
-                entity.Property(e => e.Gender)
-                    .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("gender");
+                entity.Property(e => e.Gender).HasMaxLength(100);
 
-                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.LastName).HasMaxLength(100);
 
-                entity.Property(e => e.LastName)
-                    .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("last_name");
+                entity.HasOne(d => d.Faculty)
+                    .WithMany(p => p.Students)
+                    .HasForeignKey(d => d.FacultyId)
+                    .HasConstraintName("FK__Student__Faculty__267ABA7A");
             });
 
             OnModelCreatingPartial(modelBuilder);
