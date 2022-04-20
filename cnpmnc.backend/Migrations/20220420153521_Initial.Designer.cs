@@ -12,7 +12,7 @@ using cnpmnc.backend.Data;
 namespace cnpmnc.backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220415085204_Initial")]
+    [Migration("20220420153521_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,6 +44,12 @@ namespace cnpmnc.backend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("LiteracyId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -70,6 +76,8 @@ namespace cnpmnc.backend.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("LiteracyId");
+
                     b.ToTable("Accounts", (string)null);
 
                     b.HasData(
@@ -78,6 +86,8 @@ namespace cnpmnc.backend.Migrations
                             Id = 1,
                             AccountType = 1,
                             IdCard = "1",
+                            IsDeleted = false,
+                            LiteracyId = 1,
                             Name = "1",
                             Password = "1",
                             PhoneNumber = 1,
@@ -87,11 +97,17 @@ namespace cnpmnc.backend.Migrations
                         {
                             Id = 2,
                             AccountType = 2,
+                            ActualNumberOfHoursInClass = 15,
                             IdCard = "1",
+                            IsDeleted = false,
+                            LiteracyId = 2,
                             Name = "2",
+                            NumberOfBreaks = 0,
+                            NumberOfHoursInClass = 15,
+                            NumberOfTeachingSessions = 15,
                             Password = "1",
                             PhoneNumber = 1,
-                            Username = "leturer"
+                            Username = "gv1"
                         });
                 });
 
@@ -102,6 +118,9 @@ namespace cnpmnc.backend.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("ExpiryDate")
                         .HasColumnType("datetime2");
@@ -115,14 +134,17 @@ namespace cnpmnc.backend.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CourseId");
+
                     b.ToTable("Certificates", (string)null);
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            ExpiryDate = new DateTime(2025, 4, 15, 15, 52, 3, 807, DateTimeKind.Local).AddTicks(2639),
-                            IssueDate = new DateTime(2022, 4, 15, 15, 52, 3, 807, DateTimeKind.Local).AddTicks(2630),
+                            CourseId = 1,
+                            ExpiryDate = new DateTime(2025, 4, 20, 22, 35, 20, 975, DateTimeKind.Local).AddTicks(8885),
+                            IssueDate = new DateTime(2022, 4, 20, 22, 35, 20, 975, DateTimeKind.Local).AddTicks(8876),
                             Name = "Software"
                         });
                 });
@@ -184,9 +206,6 @@ namespace cnpmnc.backend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("CertificateId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Content")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -197,6 +216,9 @@ namespace cnpmnc.backend.Migrations
 
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -214,44 +236,42 @@ namespace cnpmnc.backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CertificateId");
-
                     b.ToTable("Courses", (string)null);
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            CertificateId = 1,
                             Content = "1",
                             Detail = "1",
-                            EndDate = new DateTime(2022, 7, 15, 15, 52, 3, 807, DateTimeKind.Local).AddTicks(2662),
-                            Name = "Andora",
-                            StartDate = new DateTime(2022, 4, 15, 15, 52, 3, 807, DateTimeKind.Local).AddTicks(2661),
+                            EndDate = new DateTime(2022, 7, 20, 22, 35, 20, 975, DateTimeKind.Local).AddTicks(8927),
+                            IsDeleted = false,
+                            Name = "Đồ án 1",
+                            StartDate = new DateTime(2022, 4, 20, 22, 35, 20, 975, DateTimeKind.Local).AddTicks(8926),
                             StudyConditions = "1",
                             Tuition = 0
                         },
                         new
                         {
                             Id = 2,
-                            CertificateId = 1,
                             Content = "1",
                             Detail = "1",
-                            EndDate = new DateTime(2022, 7, 15, 15, 52, 3, 807, DateTimeKind.Local).AddTicks(2665),
-                            Name = "Andora",
-                            StartDate = new DateTime(2022, 4, 15, 15, 52, 3, 807, DateTimeKind.Local).AddTicks(2664),
+                            EndDate = new DateTime(2022, 7, 20, 22, 35, 20, 975, DateTimeKind.Local).AddTicks(8931),
+                            IsDeleted = false,
+                            Name = "NodeJS",
+                            StartDate = new DateTime(2022, 4, 20, 22, 35, 20, 975, DateTimeKind.Local).AddTicks(8931),
                             StudyConditions = "1",
                             Tuition = 0
                         },
                         new
                         {
                             Id = 3,
-                            CertificateId = 1,
                             Content = "1",
                             Detail = "1",
-                            EndDate = new DateTime(2022, 7, 15, 15, 52, 3, 807, DateTimeKind.Local).AddTicks(2666),
-                            Name = "Andora",
-                            StartDate = new DateTime(2022, 4, 15, 15, 52, 3, 807, DateTimeKind.Local).AddTicks(2666),
+                            EndDate = new DateTime(2022, 7, 20, 22, 35, 20, 975, DateTimeKind.Local).AddTicks(8933),
+                            IsDeleted = false,
+                            Name = "ASP.NET",
+                            StartDate = new DateTime(2022, 4, 20, 22, 35, 20, 975, DateTimeKind.Local).AddTicks(8933),
                             StudyConditions = "1",
                             Tuition = 0
                         });
@@ -264,6 +284,9 @@ namespace cnpmnc.backend.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int?>("AccountId")
+                        .HasColumnType("int");
 
                     b.Property<int>("CourseId")
                         .HasColumnType("int");
@@ -280,6 +303,8 @@ namespace cnpmnc.backend.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AccountId");
+
                     b.HasIndex("CourseId");
 
                     b.ToTable("Grades", (string)null);
@@ -289,7 +314,15 @@ namespace cnpmnc.backend.Migrations
                         {
                             Id = 1,
                             CourseId = 1,
-                            Name = "Andora",
+                            Name = "Đồ án 1 - 1",
+                            NumberOfSessions = 0,
+                            Total = 0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CourseId = 1,
+                            Name = "Đồ án 1 - 2",
                             NumberOfSessions = 0,
                             Total = 0
                         });
@@ -307,12 +340,7 @@ namespace cnpmnc.backend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TeacherId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("TeacherId");
 
                     b.ToTable("Literacies", (string)null);
 
@@ -320,8 +348,17 @@ namespace cnpmnc.backend.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Andora",
-                            TeacherId = 2
+                            Name = "THPT"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Đại học"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Thạc sĩ"
                         });
                 });
 
@@ -339,11 +376,16 @@ namespace cnpmnc.backend.Migrations
                     b.Property<int>("GradeId")
                         .HasColumnType("int");
 
+                    b.Property<int>("SchoolShiftId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ClassroomId");
 
                     b.HasIndex("GradeId");
+
+                    b.HasIndex("SchoolShiftId");
 
                     b.ToTable("Schedules", (string)null);
 
@@ -352,7 +394,8 @@ namespace cnpmnc.backend.Migrations
                         {
                             Id = 1,
                             ClassroomId = 1,
-                            GradeId = 1
+                            GradeId = 1,
+                            SchoolShiftId = 1
                         });
                 });
 
@@ -364,22 +407,17 @@ namespace cnpmnc.backend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<DateTime>("EndTime")
-                        .HasColumnType("datetime2");
+                    b.Property<TimeSpan>("EndTime")
+                        .HasColumnType("time");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ScheduleId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("StartTime")
-                        .HasColumnType("datetime2");
+                    b.Property<TimeSpan>("StartTime")
+                        .HasColumnType("time");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ScheduleId");
 
                     b.ToTable("SchoolShifts", (string)null);
 
@@ -387,50 +425,55 @@ namespace cnpmnc.backend.Migrations
                         new
                         {
                             Id = 1,
-                            EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Andora",
-                            ScheduleId = 1,
-                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        });
-                });
-
-            modelBuilder.Entity("cnpmnc.backend.Models.TeacherGrade", b =>
-                {
-                    b.Property<int>("TeacherId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("GradeId")
-                        .HasColumnType("int");
-
-                    b.HasKey("TeacherId");
-
-                    b.HasIndex("GradeId");
-
-                    b.ToTable("TeacherGrades", (string)null);
-
-                    b.HasData(
+                            EndTime = new TimeSpan(0, 9, 15, 0, 0),
+                            Name = "Ca 1",
+                            StartTime = new TimeSpan(0, 6, 45, 0, 0)
+                        },
                         new
                         {
-                            TeacherId = 2,
-                            GradeId = 1
+                            Id = 2,
+                            EndTime = new TimeSpan(0, 12, 0, 0, 0),
+                            Name = "Ca 2",
+                            StartTime = new TimeSpan(0, 9, 30, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            EndTime = new TimeSpan(0, 12, 15, 0, 0),
+                            Name = "Ca 3",
+                            StartTime = new TimeSpan(0, 12, 45, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 4,
+                            EndTime = new TimeSpan(0, 18, 0, 0, 0),
+                            Name = "Ca 4",
+                            StartTime = new TimeSpan(0, 15, 30, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 5,
+                            EndTime = new TimeSpan(0, 21, 45, 0, 0),
+                            Name = "Ca 5",
+                            StartTime = new TimeSpan(0, 18, 15, 0, 0)
                         });
                 });
 
-            modelBuilder.Entity("cnpmnc.backend.Models.Course", b =>
+            modelBuilder.Entity("cnpmnc.backend.Models.Account", b =>
                 {
-                    b.HasOne("cnpmnc.backend.Models.Certificate", "Certificate")
-                        .WithMany("Courses")
-                        .HasForeignKey("CertificateId")
+                    b.HasOne("cnpmnc.backend.Models.Literacy", "Literacy")
+                        .WithMany()
+                        .HasForeignKey("LiteracyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Certificate");
+                    b.Navigation("Literacy");
                 });
 
-            modelBuilder.Entity("cnpmnc.backend.Models.Grade", b =>
+            modelBuilder.Entity("cnpmnc.backend.Models.Certificate", b =>
                 {
                     b.HasOne("cnpmnc.backend.Models.Course", "Course")
-                        .WithMany("Grades")
+                        .WithMany()
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -438,15 +481,19 @@ namespace cnpmnc.backend.Migrations
                     b.Navigation("Course");
                 });
 
-            modelBuilder.Entity("cnpmnc.backend.Models.Literacy", b =>
+            modelBuilder.Entity("cnpmnc.backend.Models.Grade", b =>
                 {
-                    b.HasOne("cnpmnc.backend.Models.Account", "Teacher")
-                        .WithMany("Literacies")
-                        .HasForeignKey("TeacherId")
+                    b.HasOne("cnpmnc.backend.Models.Account", null)
+                        .WithMany("Grades")
+                        .HasForeignKey("AccountId");
+
+                    b.HasOne("cnpmnc.backend.Models.Course", "Course")
+                        .WithMany("Grades")
+                        .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Teacher");
+                    b.Navigation("Course");
                 });
 
             modelBuilder.Entity("cnpmnc.backend.Models.Schedule", b =>
@@ -463,51 +510,22 @@ namespace cnpmnc.backend.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("cnpmnc.backend.Models.SchoolShift", "SchoolShift")
+                        .WithMany("Schedules")
+                        .HasForeignKey("SchoolShiftId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Classroom");
 
                     b.Navigation("Grade");
-                });
 
-            modelBuilder.Entity("cnpmnc.backend.Models.SchoolShift", b =>
-                {
-                    b.HasOne("cnpmnc.backend.Models.Schedule", "Schedule")
-                        .WithMany("SchoolShifts")
-                        .HasForeignKey("ScheduleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Schedule");
-                });
-
-            modelBuilder.Entity("cnpmnc.backend.Models.TeacherGrade", b =>
-                {
-                    b.HasOne("cnpmnc.backend.Models.Grade", "Grade")
-                        .WithMany("TeacherGrades")
-                        .HasForeignKey("GradeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("cnpmnc.backend.Models.Account", "Teacher")
-                        .WithMany("TeacherGrades")
-                        .HasForeignKey("TeacherId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Grade");
-
-                    b.Navigation("Teacher");
+                    b.Navigation("SchoolShift");
                 });
 
             modelBuilder.Entity("cnpmnc.backend.Models.Account", b =>
                 {
-                    b.Navigation("Literacies");
-
-                    b.Navigation("TeacherGrades");
-                });
-
-            modelBuilder.Entity("cnpmnc.backend.Models.Certificate", b =>
-                {
-                    b.Navigation("Courses");
+                    b.Navigation("Grades");
                 });
 
             modelBuilder.Entity("cnpmnc.backend.Models.Classroom", b =>
@@ -523,13 +541,11 @@ namespace cnpmnc.backend.Migrations
             modelBuilder.Entity("cnpmnc.backend.Models.Grade", b =>
                 {
                     b.Navigation("Schedules");
-
-                    b.Navigation("TeacherGrades");
                 });
 
-            modelBuilder.Entity("cnpmnc.backend.Models.Schedule", b =>
+            modelBuilder.Entity("cnpmnc.backend.Models.SchoolShift", b =>
                 {
-                    b.Navigation("SchoolShifts");
+                    b.Navigation("Schedules");
                 });
 #pragma warning restore 612, 618
         }

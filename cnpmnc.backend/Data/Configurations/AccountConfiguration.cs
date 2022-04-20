@@ -22,5 +22,6 @@ public class AccountConfiguration : IEntityTypeConfiguration<Account>
         builder.Property(b => b.ActualNumberOfHoursInClass);
         builder.Property(b => b.NumberOfTeachingSessions);
         builder.Property(b => b.NumberOfBreaks);
+        builder.Property(b => b.IsDeleted);
     }
 }

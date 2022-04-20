@@ -1,7 +1,8 @@
-namespace cnpmnc.shared.Enums;
-
-public enum AccountType
+namespace cnpmnc.shared.Enums
 {
-    Admin = 1,
-    Teacher = 2
+    public enum AccountType
+    {
+        Admin = 1,
+        Teacher = 2
+    }
 }

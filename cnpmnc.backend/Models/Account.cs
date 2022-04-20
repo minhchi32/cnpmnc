@@ -11,10 +11,12 @@ public class Account
     public AccountType AccountType { get; set; }
     public string IdCard { get; set; }
     public int PhoneNumber { get; set; }
-    public List<Literacy>? Literacies { get; set; }
+    public int LiteracyId { get; set; }
+    public Literacy Literacy { get; set; }
     public int? NumberOfHoursInClass { get; set; }
     public int? ActualNumberOfHoursInClass { get; set; }
     public int? NumberOfTeachingSessions { get; set; }
     public int? NumberOfBreaks { get; set; }
-    public List<TeacherGrade>? TeacherGrades { get; set; }
+    public List<Grade>? Grades { get; set; }
+    public bool IsDeleted { get; set; }
 }

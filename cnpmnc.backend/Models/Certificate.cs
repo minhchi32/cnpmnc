@@ -6,5 +6,6 @@ public class Certificate
     public string Name { get; set; }
     public DateTime IssueDate { get; set; }
     public DateTime ExpiryDate { get; set; }
-    public List<Course> Courses { get; set; }
+    public int CourseId { get; set; }
+    public Course Course { get; set; }
 }

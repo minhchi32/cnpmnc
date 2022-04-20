@@ -14,6 +14,7 @@ public static class CertificateDataInitializer
                 Name = "Software",
                 IssueDate = DateTime.Now,
                 ExpiryDate = DateTime.Now.AddYears(3),
+                CourseId = 1,
             }
         );
     }

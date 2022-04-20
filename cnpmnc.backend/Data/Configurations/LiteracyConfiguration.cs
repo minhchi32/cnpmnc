@@ -12,7 +12,5 @@ public class LiteracyConfiguration : IEntityTypeConfiguration<Literacy>
         builder.HasKey(b => b.Id);
         builder.Property(b => b.Id).UseIdentityColumn();
         builder.Property(b => b.Name).IsRequired();
-        builder.Property(b => b.TeacherId).IsRequired();
-        builder.HasOne(c => c.Teacher).WithMany(x => x.Literacies).HasForeignKey(x => x.TeacherId);
     }
 }

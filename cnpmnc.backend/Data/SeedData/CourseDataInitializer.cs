@@ -11,35 +11,35 @@ public static class CourseDataInitializer
             new Course
             {
                 Id = 1,
-                Name = "Andora",
+                Name = "Đồ án 1",
                 Content = "1",
                 Detail = "1",
                 StartDate = DateTime.Now,
                 EndDate = DateTime.Now.AddMonths(3),
                 StudyConditions = "1",
-                CertificateId = 1,
+                IsDeleted = false,
             },
             new Course
             {
                 Id = 2,
-                Name = "Andora",
+                Name = "NodeJS",
                 Content = "1",
                 Detail = "1",
                 StartDate = DateTime.Now,
                 EndDate = DateTime.Now.AddMonths(3),
                 StudyConditions = "1",
-                CertificateId = 1,
+                IsDeleted = false,
             },
             new Course
             {
                 Id = 3,
-                Name = "Andora",
+                Name = "ASP.NET",
                 Content = "1",
                 Detail = "1",
                 StartDate = DateTime.Now,
                 EndDate = DateTime.Now.AddMonths(3),
                 StudyConditions = "1",
-                CertificateId = 1,
+                IsDeleted = false,
             }
         );
     }

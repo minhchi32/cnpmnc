@@ -12,22 +12,30 @@ public static class AccountDataInitializer
             new Account
             {
                 Id = 1,
-                Name="1",
+                Name = "1",
                 Username = "admin",
                 Password = "1",
                 AccountType = AccountType.Admin,
-                IdCard="1",
-                PhoneNumber= 1,
+                IdCard = "1",
+                PhoneNumber = 1,
+                LiteracyId = 1,
+                IsDeleted = false,
             },
             new Account
             {
                 Id = 2,
                 Name = "2",
-                Username = "leturer",
+                Username = "gv1",
                 Password = "1",
                 AccountType = AccountType.Teacher,
                 IdCard = "1",
                 PhoneNumber = 1,
+                LiteracyId = 2,
+                NumberOfHoursInClass = 15,
+                ActualNumberOfHoursInClass = 15,
+                NumberOfTeachingSessions = 15,
+                NumberOfBreaks = 0,
+                IsDeleted = false,
             }
         );
     }

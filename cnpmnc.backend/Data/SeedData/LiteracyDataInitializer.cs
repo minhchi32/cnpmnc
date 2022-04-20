@@ -11,8 +11,17 @@ public static class LiteracyDataInitializer
             new Literacy
             {
                 Id = 1,
-                Name = "Andora",
-                TeacherId = 2,
+                Name = "THPT"
+            },
+            new Literacy
+            {
+                Id = 2,
+                Name = "Đại học"
+            },
+            new Literacy
+            {
+                Id = 3,
+                Name = "Thạc sĩ"
             }
         );
     }

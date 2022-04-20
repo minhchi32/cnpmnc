@@ -4,9 +4,8 @@ namespace cnpmnc.backend.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public DateTime StartTime { get; set; }
-        public DateTime EndTime { get; set; }
-        public int ScheduleId { get; set; }
-        public Schedule Schedule { get; set; }
+        public TimeSpan StartTime { get; set; }
+        public TimeSpan EndTime { get; set; }
+        public List<Schedule> Schedules { get; set; }
     }
 }

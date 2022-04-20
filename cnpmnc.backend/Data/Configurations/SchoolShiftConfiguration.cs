@@ -14,7 +14,5 @@ public class SchoolShiftConfiguration : IEntityTypeConfiguration<SchoolShift>
         builder.Property(b => b.Name).IsRequired();
         builder.Property(b => b.StartTime).IsRequired();
         builder.Property(b => b.EndTime).IsRequired();
-        builder.Property(b => b.ScheduleId).IsRequired();
-        builder.HasOne(c => c.Schedule).WithMany(x => x.SchoolShifts).HasForeignKey(x => x.ScheduleId);
     }
 }

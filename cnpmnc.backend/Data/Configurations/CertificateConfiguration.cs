@@ -14,5 +14,6 @@ public class CertificateConfiguration : IEntityTypeConfiguration<Certificate>
         builder.Property(b => b.Name).IsRequired();
         builder.Property(b => b.IssueDate).IsRequired();
         builder.Property(b => b.ExpiryDate).IsRequired();
+        builder.Property(b => b.CourseId).IsRequired();
     }
 }

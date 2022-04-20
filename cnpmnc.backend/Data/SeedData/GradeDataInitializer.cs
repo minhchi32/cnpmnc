@@ -11,8 +11,16 @@ public static class GradeDataInitializer
             new Grade
             {
                 Id = 1,
-                Name = "Andora",
+                Name = "Đồ án 1 - 1",
                 CourseId = 1,
+            },
+
+            new Grade
+            {
+                Id = 2,
+                Name = "Đồ án 1 - 2",
+                CourseId = 1,
+                
             }
         );
     }

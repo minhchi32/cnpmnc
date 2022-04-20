@@ -19,7 +19,6 @@ public class CourseConfiguration : IEntityTypeConfiguration<Course>
         builder.Property(b => b.StudyConditions).IsRequired();
         builder.Property(b => b.Tuition).IsRequired();
         builder.Property(b => b.StudyConditions).IsRequired();
-        builder.Property(b => b.CertificateId).IsRequired();
-        builder.HasOne(b=>b.Certificate).WithMany(b=>b.Courses).HasForeignKey(b=>b.CertificateId);
+        builder.Property(b => b.IsDeleted);
     }
 }

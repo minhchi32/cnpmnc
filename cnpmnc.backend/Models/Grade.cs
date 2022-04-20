@@ -9,5 +9,4 @@ public class Grade
     public int NumberOfSessions { get; set; }
     public int Total { get; set; }
     public List<Schedule> Schedules { get; set; }
-    public List<TeacherGrade> TeacherGrades { get; set; }
 }

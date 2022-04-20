@@ -7,5 +7,6 @@ public class Schedule
     public Grade Grade { get; set; }
     public int ClassroomId { get; set; }
     public Classroom Classroom { get; set; }
-    public List<SchoolShift> SchoolShifts { get; set; }
+    public int SchoolShiftId { get; set; }
+    public SchoolShift SchoolShift { get; set; }
 }

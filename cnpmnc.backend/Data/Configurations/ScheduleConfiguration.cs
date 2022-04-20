@@ -15,5 +15,7 @@ public class ScheduleConfiguration : IEntityTypeConfiguration<Schedule>
         builder.HasOne(c => c.Grade).WithMany(x => x.Schedules).HasForeignKey(x => x.GradeId);
         builder.Property(b => b.ClassroomId).IsRequired();
         builder.HasOne(c => c.Classroom).WithMany(x => x.Schedules).HasForeignKey(x => x.ClassroomId);
+        builder.Property(b => b.SchoolShiftId).IsRequired();
+        builder.HasOne(c => c.SchoolShift).WithMany(x => x.Schedules).HasForeignKey(x => x.SchoolShiftId);
     }
 }
