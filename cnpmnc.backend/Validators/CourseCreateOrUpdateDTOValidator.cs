@@ -5,9 +5,9 @@ using FluentValidation;
 
 namespace Rookie.AssetManagement.Validators
 {
-    public class CourseCreateDTOValidator : BaseValidator<CourseCreateDTO>
+    public class CourseCreateOrUpdateDTOValidator : BaseValidator<CourseCreateOrUpdateDTO>
     {
-        public CourseCreateDTOValidator()
+        public CourseCreateOrUpdateDTOValidator()
         {
 
             RuleFor(m => m.Name)

@@ -9,12 +9,12 @@ namespace cnpmnc.backend.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class CourseController : ControllerBase
+public class CoursesController : ControllerBase
 {
 
     private readonly ICourseService _courseService;
 
-    public CourseController(ICourseService courseService)
+    public CoursesController(ICourseService courseService)
     {
         _courseService = courseService;
     }
@@ -30,10 +30,17 @@ public class CourseController : ControllerBase
                                         cancellationToken);
         return Ok(responses);
     }
-    [HttpPost]
-    public async Task<IActionResult> Create([FromBody] CourseCreateDTO createDTO)
+
+    [HttpGet("{id}")]
+    public async Task<ActionResult<PagedResponseModel<CourseDTO>>> GetCourse(int id)
     {
-        var validationResult = new CourseCreateDTOValidator().Validate(createDTO);
+        var responses = await _courseService.GetById(id);
+        return Ok(responses);
+    }
+    [HttpPost]
+    public async Task<IActionResult> Create([FromBody] CourseCreateOrUpdateDTO createDTO)
+    {
+        var validationResult = new CourseCreateOrUpdateDTOValidator().Validate(createDTO);
         if (!validationResult.IsValid)
         {
             return BadRequest(validationResult);
@@ -54,11 +61,11 @@ public class CourseController : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(
         [FromRoute] int id,
-        [FromBody] CourseUpdateDTO updateDTO)
+        [FromBody] CourseCreateOrUpdateDTO updateDTO)
     {
         Ensure.Any.IsNotNull(updateDTO, nameof(updateDTO));
 
-        var validationResult = new CourseUpdateDTOValidator().Validate(updateDTO);
+        var validationResult = new CourseCreateOrUpdateDTOValidator().Validate(updateDTO);
         if (!validationResult.IsValid)
         {
             return BadRequest(validationResult);

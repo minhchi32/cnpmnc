@@ -1,17 +1,16 @@
 ﻿using System.Reflection;
-using cnpmnc.backend;
-using cnpmnc.backend.Service;
-using cnpmnc.shared.Interfaces;
-namespace cnpmnc.backend
+using cnpmnc.frontend.Service;
+
+namespace cnpmnc.frontend
 {
     public static class ServiceRegister
     {
         public static void AddBusinessLayer(this IServiceCollection services)
         {
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
-            services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
-            // services.AddTransient<IUserService, UserService>();
             services.AddTransient<ICourseService, CourseService>();
+            services.AddRazorPages();
         }
     }
 }

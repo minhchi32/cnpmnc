@@ -1,11 +1,10 @@
 using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using cnpmnc.backend;
 using cnpmnc.backend.Data;
-using cnpmnc.backend.Service;
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
-using Rookie.AssetManagement.Business;
 
 var MyAllowSpecificOrigins = "AllowOrigins";
 var builder = WebApplication.CreateBuilder(args);

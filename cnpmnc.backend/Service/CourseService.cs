@@ -46,7 +46,7 @@ class CourseService : ICourseService
             Items = dtos
         };
     }
-    public async Task<CourseDTO> Create(CourseCreateDTO request)
+    public async Task<CourseDTO> Create(CourseCreateOrUpdateDTO request)
     {
         Ensure.Any.IsNotNull(request);
 
@@ -60,7 +60,7 @@ class CourseService : ICourseService
         return null;
     }
 
-    public async Task<CourseDTO> Update(int id, CourseUpdateDTO request)
+    public async Task<CourseDTO> Update(int id, CourseCreateOrUpdateDTO request)
     {
         var course = await _courseRepository.Entities
                 .FirstOrDefaultAsync(x => x.Id == id);
@@ -70,7 +70,7 @@ class CourseService : ICourseService
             throw new NotFoundException("Not Found!");
         }
 
-        course = _mapper.Map<CourseUpdateDTO, Course>(request, course);
+        course = _mapper.Map<CourseCreateOrUpdateDTO, Course>(request, course);
 
         var courseUpdated = await _courseRepository.Update(course);
 
@@ -99,9 +99,15 @@ class CourseService : ICourseService
         throw new NotImplementedException();
     }
 
-    public Task<CourseDTO> GetById(int id)
+    public async Task<CourseDTO> GetById(int id)
     {
-        throw new NotImplementedException();
+        var course = await _courseRepository.Entities.FirstOrDefaultAsync(x => x.Id == id);
+
+        if (course == null)
+        {
+            throw new NotFoundException("Not Found!");
+        }
+        return _mapper.Map<CourseDTO>(course);
     }
 
     private IQueryable<Course> Filter(
