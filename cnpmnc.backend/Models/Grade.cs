@@ -9,4 +9,6 @@ public class Grade
     public int NumberOfSessions { get; set; }
     public int Total { get; set; }
     public List<Schedule> Schedules { get; set; }
+    public int TeacherId { get; set; }
+    public Account Teacher { get; set; }
 }

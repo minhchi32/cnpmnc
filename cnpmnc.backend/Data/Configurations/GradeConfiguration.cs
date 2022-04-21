@@ -16,5 +16,7 @@ public class GradeConfiguration : IEntityTypeConfiguration<Grade>
         builder.HasOne(c => c.Course).WithMany(x => x.Grades).HasForeignKey(x => x.CourseId);
         builder.Property(b => b.NumberOfSessions).IsRequired();
         builder.Property(b => b.Total).IsRequired();
+        builder.Property(b => b.TeacherId).IsRequired();
+        builder.HasOne(c => c.Teacher).WithMany(x => x.Grades).HasForeignKey(x => x.TeacherId);
     }
 }
