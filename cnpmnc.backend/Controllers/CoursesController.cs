@@ -19,7 +19,7 @@ public class CoursesController : ControllerBase
         _courseService = courseService;
     }
 
-    [HttpGet]
+    [HttpGet("paging")]
     public async Task<ActionResult<PagedResponseModel<CourseDTO>>> GetCourses(
         [FromQuery] CourseQueryCriteria criteria,
         CancellationToken cancellationToken)

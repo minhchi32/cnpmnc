@@ -40,9 +40,9 @@ class CourseService : ICourseService
 
         return new PagedResponseModel<CourseDTO>
         {
-            CurrentPage = courses.CurrentPage,
-            TotalPages = courses.TotalPages,
-            TotalItems = courses.TotalItems,
+            Page = courses.Page,
+            //TotalPages = courses.TotalPages,
+            TotalRecord = courses.TotalRecord,
             Items = dtos
         };
     }

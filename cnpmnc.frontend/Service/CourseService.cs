@@ -28,7 +28,7 @@ namespace cnpmnc.frontend.Service
             var client = _httpClientFactory.CreateClient();
             client.BaseAddress = new Uri(_configuration[ConfigurationConstants.BackendEndPoint]);
             var data = await client.GetAsync(
-                $"/api/courses?page={queryCriteria.Page}" +
+                $"/api/courses/paging?Page={queryCriteria.Page}" +
                 $"&limit={queryCriteria.Limit}" +
                 $"&search={queryCriteria.Search}");
             var body = await data.Content.ReadAsStringAsync();

@@ -12,13 +12,13 @@ public class CourseController : Controller
     {
         _courseService = courseService;
     }
-    public async Task<IActionResult> Index(string keyword, int pageIndex = 1, int pageSize = 10)
+    public async Task<IActionResult> Index(string keyword, int page = 1, int limit = 5)
     {
         var request = new CourseQueryCriteria()
         {
             Search = keyword,
-            Limit = pageSize,
-            Page = pageIndex
+            Limit = limit,
+            Page = page
         };
         var data = await _courseService.GetByPageAsync(request, new CancellationToken());
         ViewBag.Keyword = keyword;
