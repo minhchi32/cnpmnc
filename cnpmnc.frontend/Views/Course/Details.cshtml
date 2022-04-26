@@ -1,59 +1,87 @@
-@model cnpmnc.backend.DTOs.Course.CourseDTO
+﻿@model cnpmnc.backend.DTOs.Course.CourseDTO
 @{
     ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h1>Details</h1>
+<!-- Begin Page Content -->
+<div class="container-fluid">
+        <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Chi tiết khóa học</h6>
+        </div>
+        <div class="card-body">
+            <h4>Thông tin khóa học</h4>
+                <hr />
+            <dl class="dl-horizontal">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+                <dt class = "col-sm-2">
+                    @Html.DisplayNameFor(model => model.Content)
+                </dt>
+                <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.Content)
+                </dd>
+                <dt class = "col-sm-2">
+                    @Html.DisplayNameFor(model => model.Detail)
+                </dt>
+                <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.Detail)
+                </dd>
+                <dt class = "col-sm-2">
+                    @Html.DisplayNameFor(model => model.StartDate)
+                </dt>
+                <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.StartDate)
+                </dd>
+                <dt class = "col-sm-2">
+                    @Html.DisplayNameFor(model => model.EndDate)
+                </dt>
+                <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.EndDate)
+                </dd>
+                <dt class = "col-sm-2">
+                    @Html.DisplayNameFor(model => model.StudyConditions)
+                </dt>
+                <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.StudyConditions)
+                </dd>
+                <dt class = "col-sm-2">
+                    @Html.DisplayNameFor(model => model.Tuition)
+                </dt>
+                <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.Tuition)
+                </dd>
+            </dl>
+        <div>
+            @Html.ActionLink("Edit", "CreateOrUpdate", new { id = Model.Id }, new{ @class="btn btn-warning" }) |
+            <a class="btn btn-danger" asp-action="Index">Back to List</a>
+        </div>           
+        </div>
+    </div>
+</div>
+    <!-- /.container-fluid -->
 
-<div>
-    <h4>Course</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Content)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Content)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Detail)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Detail)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.StartDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.StartDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.EndDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.EndDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.StudyConditions)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.StudyConditions)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Tuition)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Tuition)
-        </dd>
-    </dl>
-</div>
-<div>
-    @Html.ActionLink("Edit", "CreateOrUpdate", new { id = Model.Id }) |
-    <a asp-action="Index">Back to List</a>
-</div>
+@section Scripts {
+                    <!-- Bootstrap core JavaScript-->
+                    <script src="~/lib/Content/loginassets/vendor/jquery/jquery.min.js"></script>
+                    <script src="~/lib/Content/loginassets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+                    <!-- Core plugin JavaScript-->
+                    <script src="~/lib/Content/loginassets/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+                    <!-- Custom scripts for all pages-->
+                    <script src="~/lib/Content/loginassets/js/sb-admin-2.min.js"></script>
+
+                    <!-- Page level plugins -->
+                    <script src="~/lib/Content/loginassets/vendor/datatables/jquery.dataTables.min.js"></script>
+                    <script src="~/lib/Content/loginassets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+                    <!-- Page level custom scripts -->
+                    <script src="~/lib/Content/loginassets/js/demo/datatables-demo.js"></script>
+                }

@@ -2,63 +2,90 @@
 
 @{
     ViewData["Title"] = "CreateOrUpdate";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<div class="container p-3 my-3 border">
-    <h1> @ViewBag.PageName</h1>
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Thêm khóa học mới</h6>
+            </div>
+            <div class="card-body">
 
-    <div class="row">
-        <div class="col-sm-6">
-            <hr />
-            <form asp-action="CreateOrUpdate" enctype="multipart/form-data" method="post">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                @if (@ViewBag.IsEdit)
-                {
-                    <input type="hidden" asp-for="Id" />
-                }
-                <div class="form-group">
-                    <label asp-for="Name" class="control-label"></label>
-                    <input asp-for="Name" class="form-control" />
-                    <span asp-validation-for="Name" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Content" class="control-label"></label>
-                    <input asp-for="Content" class="form-control" />
-                    <span asp-validation-for="Content" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Detail" class="control-label"></label>
-                    <input asp-for="Detail" class="form-control" />
-                    <span asp-validation-for="Detail" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="StartDate" class="control-label"></label>
-                    <input asp-for="StartDate" class="form-control" />
-                    <span asp-validation-for="StartDate" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="EndDate" class="control-label"></label>
-                    <input asp-for="EndDate" class="form-control" />
-                    <span asp-validation-for="EndDate" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="StudyConditions" class="control-label"></label>
-                    <input asp-for="StudyConditions" class="form-control" />
-                    <span asp-validation-for="StudyConditions" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Tuition" class="control-label"></label>
-                    <input asp-for="Tuition" class="form-control" />
-                    <span asp-validation-for="Tuition" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Save" class="btn btn-primary" />
-                    <a class="btn btn-danger" asp-action="Index">Back</a>
-                </div>
-            </form>
+
+                <form asp-action="CreateOrUpdate" enctype="multipart/form-data" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    @if (@ViewBag.IsEdit)
+                    {
+                        <input type="hidden" asp-for="Id" />
+                    }
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Content" class="control-label"></label>
+                        <input asp-for="Content" class="form-control" />
+                        <span asp-validation-for="Content" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Detail" class="control-label"></label>
+                        <input asp-for="Detail" class="form-control" />
+                        <span asp-validation-for="Detail" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="StartDate" class="control-label"></label>
+                        <input asp-for="StartDate" class="form-control" />
+                        <span asp-validation-for="StartDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="EndDate" class="control-label"></label>
+                        <input asp-for="EndDate" class="form-control" />
+                        <span asp-validation-for="EndDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="StudyConditions" class="control-label"></label>
+                        <input asp-for="StudyConditions" class="form-control" />
+                        <span asp-validation-for="StudyConditions" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Tuition" class="control-label"></label>
+                        <input asp-for="Tuition" class="form-control" />
+                        <span asp-validation-for="Tuition" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                        <a class="btn btn-danger" asp-action="Index">Back</a>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
+    <!-- /.container-fluid -->
 </div>
-@section Scripts {
-@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+<!-- End of Main Content -->
+
+                @section Scripts {
+                    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+                    <!-- Bootstrap core JavaScript-->
+                    <script src="~/lib/Content/loginassets/vendor/jquery/jquery.min.js"></script>
+                    <script src="~/lib/Content/loginassets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+                    <!-- Core plugin JavaScript-->
+                    <script src="~/lib/Content/loginassets/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+                    <!-- Custom scripts for all pages-->
+                    <script src="~/lib/Content/loginassets/js/sb-admin-2.min.js"></script>
+
+                    <!-- Page level plugins -->
+                    <script src="~/lib/Content/loginassets/vendor/datatables/jquery.dataTables.min.js"></script>
+                    <script src="~/lib/Content/loginassets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+                    <!-- Page level custom scripts -->
+                    <script src="~/lib/Content/loginassets/js/demo/datatables-demo.js"></script>
+                }

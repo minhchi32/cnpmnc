@@ -3,6 +3,7 @@
 
 @{
     ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 @section Scripts{
     <script>
@@ -48,7 +49,7 @@
                     <thead>
                         <tr>
                             <th>
-                                Tên khóa học
+                                <a href="">Tên khóa học <span><i class="fa-solid fa-sort-down"></i></span></a>
                             </th>
                             <th>
                                 Nội dung
@@ -85,10 +86,10 @@
                                     @Html.DisplayFor(modelItem => item.Detail)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.StartDate)
+                                    @Convert.ToDateTime(item.StartDate).ToString("dd/MM/yyyy")
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.EndDate)
+                                    @Convert.ToDateTime(item.EndDate).ToString("dd/MM/yyyy")
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.StudyConditions)
