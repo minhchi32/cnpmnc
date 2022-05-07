@@ -1,4 +1,4 @@
-namespace cnpmnc.backend.DTOs.Course
+namespace cnpmnc.backend.DTOs.CourseDTOs
 {
     public class CourseDTO
     {

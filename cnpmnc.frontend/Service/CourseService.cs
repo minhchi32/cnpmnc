@@ -1,5 +1,5 @@
 using System.Text;
-using cnpmnc.backend.DTOs.Course;
+using cnpmnc.backend.DTOs.CourseDTOs;
 using cnpmnc.shared;
 using cnpmnc.shared.Constants;
 using Newtonsoft.Json;

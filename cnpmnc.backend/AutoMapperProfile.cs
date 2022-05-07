@@ -1,4 +1,6 @@
-﻿using cnpmnc.backend.DTOs.Course;
+﻿using cnpmnc.backend.DTOs.CourseDTOs;
+using cnpmnc.backend.DTOs.GradeDTOs;
+using cnpmnc.backend.DTOs.TeacherDTOs;
 using cnpmnc.backend.Models;
 
 namespace cnpmnc.backend
@@ -31,6 +33,31 @@ namespace cnpmnc.backend
                 .ForMember(src => src.IsDeleted, act => act.Ignore())
                 .ReverseMap();
 
+            CreateMap<TeacherDTO, Account>()
+                            .ForMember(src => src.AccountType, act => act.Ignore())
+                            .ForMember(src => src.IsDeleted, act => act.Ignore())
+                            .ReverseMap();
+
+            CreateMap<TeacherCreateOrUpdateDTO, Account>()
+                .ForMember(src => src.Name, act => act.MapFrom(dest => dest.Name))
+                .ForMember(src => src.Username, act => act.MapFrom(dest => dest.Username))
+                .ForMember(src => src.Password, act => act.MapFrom(dest => dest.Password))
+                .ForMember(src => src.IdCard, act => act.MapFrom(dest => dest.IdCard))
+                .ForMember(src => src.PhoneNumber, act => act.MapFrom(dest => dest.PhoneNumber))
+                .ForMember(src => src.LiteracyId, act => act.MapFrom(dest => dest.LiteracyId))
+                .ForMember(src => src.AccountType, act => act.Ignore())
+                .ForMember(src => src.NumberOfHoursInClass, act => act.Ignore())
+                .ForMember(src => src.ActualNumberOfHoursInClass, act => act.Ignore())
+                .ForMember(src => src.NumberOfTeachingSessions, act => act.Ignore())
+                .ForMember(src => src.NumberOfBreaks, act => act.Ignore())
+                .ForMember(src => src.Grades, act => act.Ignore())
+                .ForMember(src => src.Literacy, act => act.Ignore())
+                .ForMember(src => src.Id, act => act.Ignore())
+                .ForMember(src => src.IsDeleted, act => act.Ignore())
+                .ReverseMap();
+
+            CreateMap<GradeDTO, Grade>()
+                        .ReverseMap();
         }
 
         private void FromDataAccessorLayer()
@@ -40,6 +67,16 @@ namespace cnpmnc.backend
             CreateMap<CourseDTO, CourseCreateOrUpdateDTO>()
                 .ReverseMap();
             CreateMap<Course, CourseDTO>()
+                .ReverseMap();
+
+            CreateMap<Account, TeacherCreateOrUpdateDTO>()
+                .ReverseMap();
+            CreateMap<TeacherDTO, TeacherCreateOrUpdateDTO>()
+                .ReverseMap();
+            CreateMap<Account, TeacherDTO>()
+                .ReverseMap();
+
+            CreateMap<Grade, GradeDTO>()
                 .ReverseMap();
         }
     }

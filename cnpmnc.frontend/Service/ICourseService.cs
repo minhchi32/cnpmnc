@@ -1,4 +1,4 @@
-using cnpmnc.backend.DTOs.Course;
+using cnpmnc.backend.DTOs.CourseDTOs;
 using cnpmnc.shared;
 
 namespace cnpmnc.frontend.Service

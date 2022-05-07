@@ -12,6 +12,8 @@ namespace cnpmnc.backend
             services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
             // services.AddTransient<IUserService, UserService>();
             services.AddTransient<ICourseService, CourseService>();
+            services.AddTransient<ITeacherService, TeacherService>();
+            services.AddTransient<IGradeService, GradeService>();
         }
     }
 }

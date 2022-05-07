@@ -1,4 +1,5 @@
 using cnpmnc.backend.DTOs.CourseDTOs;
+using cnpmnc.backend.DTOs.TeacherDTOs;
 using cnpmnc.backend.Service;
 using cnpmnc.shared;
 using EnsureThat;
@@ -9,45 +10,45 @@ namespace cnpmnc.backend.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class CoursesController : ControllerBase
+public class TeachersController : ControllerBase
 {
 
-    private readonly ICourseService _courseService;
+    private readonly ITeacherService _teacherService;
 
-    public CoursesController(ICourseService courseService)
+    public TeachersController(ITeacherService teacherService)
     {
-        _courseService = courseService;
+        _teacherService = teacherService;
     }
 
     [HttpGet("paging")]
-    public async Task<ActionResult<PagedResponseModel<CourseDTO>>> GetCourses(
-        [FromQuery] CourseQueryCriteria criteria,
+    public async Task<ActionResult<PagedResponseModel<TeacherDTO>>> GetTeachers(
+        [FromQuery] TeacherQueryCriteria criteria,
         CancellationToken cancellationToken)
     {
 
-        var responses = await _courseService.GetByPageAsync(
+        var responses = await _teacherService.GetByPageAsync(
                                         criteria,
                                         cancellationToken);
         return Ok(responses);
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<PagedResponseModel<CourseDTO>>> GetCourse(int id)
+    public async Task<ActionResult<PagedResponseModel<TeacherDTO>>> GetTeacher(int id)
     {
-        var responses = await _courseService.GetById(id);
+        var responses = await _teacherService.GetById(id);
         return Ok(responses);
     }
     [HttpPost]
-    public async Task<IActionResult> Create([FromBody] CourseCreateOrUpdateDTO createDTO)
+    public async Task<IActionResult> Create([FromBody] TeacherCreateOrUpdateDTO createDTO)
     {
-        var validationResult = new CourseCreateOrUpdateDTOValidator().Validate(createDTO);
+        var validationResult = new TeacherCreateOrUpdateDTOValidator().Validate(createDTO);
         if (!validationResult.IsValid)
         {
             return BadRequest(validationResult);
         }
         else
         {
-            var result = await _courseService.Create(createDTO);
+            var result = await _teacherService.Create(createDTO);
             if (result != null)
             {
                 return Ok(result);
@@ -61,32 +62,32 @@ public class CoursesController : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(
         [FromRoute] int id,
-        [FromBody] CourseCreateOrUpdateDTO updateDTO)
+        [FromBody] TeacherCreateOrUpdateDTO updateDTO)
     {
         Ensure.Any.IsNotNull(updateDTO, nameof(updateDTO));
 
-        var validationResult = new CourseCreateOrUpdateDTOValidator().Validate(updateDTO);
+        var validationResult = new TeacherCreateOrUpdateDTOValidator().Validate(updateDTO);
         if (!validationResult.IsValid)
         {
             return BadRequest(validationResult);
         }
         else
         {
-            var updatedCourse = await _courseService.Update(id, updateDTO);
-            if (updatedCourse != null)
+            var updatedTeacher = await _teacherService.Update(id, updateDTO);
+            if (updatedTeacher != null)
             {
-                return Ok(updatedCourse);
+                return Ok(updatedTeacher);
             }
             else
             {
-                return BadRequest(updatedCourse);
+                return BadRequest(updatedTeacher);
             }
         }
     }
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete([FromRoute] int id)
     {
-        var result = await _courseService.Delete(id);
+        var result = await _teacherService.Delete(id);
         if (result != null)
         {
             return Ok(result);

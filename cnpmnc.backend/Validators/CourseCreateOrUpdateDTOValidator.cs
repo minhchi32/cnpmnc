@@ -1,4 +1,4 @@
-﻿using cnpmnc.backend.DTOs.Course;
+﻿using cnpmnc.backend.DTOs.CourseDTOs;
 using cnpmnc.backend.Validators;
 using cnpmnc.shared.Constants;
 using FluentValidation;

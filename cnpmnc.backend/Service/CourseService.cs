@@ -1,5 +1,5 @@
 using AutoMapper;
-using cnpmnc.backend.DTOs.Course;
+using cnpmnc.backend.DTOs.CourseDTOs;
 using cnpmnc.backend.Extensions;
 using cnpmnc.backend.Models;
 using cnpmnc.shared;
