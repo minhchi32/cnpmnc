@@ -1,24 +1,24 @@
 ﻿@using cnpmnc.shared
-@model PagedResponseModel<cnpmnc.backend.DTOs.CourseDTOs.CourseDTO>
+@model PagedResponseModel<cnpmnc.backend.DTOs.TeacherDTOs.TeacherDTO>
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 @section Scripts{
-    <script>
-        setTimeout(function () {
-            $('#msgAlert').fadeOut('slow');
-        }, 2000);
-    </script>
+<script>
+    setTimeout(function () {
+        $('#msgAlert').fadeOut('slow');
+    }, 2000);
+</script>
 }
 <div class="container-fluid">
-    <h1 class="mt-4">Danh sách khóa học</h1>
+    <h1 class="mt-4">Danh sách giảng viên</h1>
     <div class="card mb-12">
         <div class="card-header">
             <div class="row">
                 <div class="col-md-6 col-xs-12">
-                    <a class="btn btn-success" asp-action="CreateOrUpdate" asp-controller="Course">Tạo mới</a>
+                    <a class="btn btn-success" asp-action="CreateOrUpdate" asp-controller="Teacher">Tạo mới</a>
                 </div>
                 <div class="col-md-6 col-xs-12">
                     <form asp-action="Index" method="get">
@@ -49,25 +49,19 @@
                     <thead>
                         <tr>
                             <th>
-                                Tên khóa học
+                                Tên giảng viên
                             </th>
                             <th>
-                                Nội dung
+                                Username
                             </th>
                             <th>
-                                Chi tiết khóa học
+                                CMND
                             </th>
                             <th>
-                                Ngày bắt đầu
+                                SĐT
                             </th>
                             <th>
-                                Ngày kết thúc
-                            </th>
-                            <th>
-                                Điều kiện học
-                            </th>
-                            <th>
-                                Học phí
+                                Trình độ học vấn
                             </th>
                             <th></th>
                         </tr>
@@ -80,27 +74,21 @@
                                     @Html.DisplayFor(modelItem => item.Name)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Content)
+                                    @Html.DisplayFor(modelItem => item.Username)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Detail)
+                                    @Html.DisplayFor(modelItem => item.IdCard)
                                 </td>
                                 <td>
-                                    @Convert.ToDateTime(item.StartDate).ToString("dd/MM/yyyy")
+                                    @Html.DisplayFor(modelItem => item.PhoneNumber)
                                 </td>
                                 <td>
-                                    @Convert.ToDateTime(item.EndDate).ToString("dd/MM/yyyy")
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.StudyConditions)
-                                </td>
-                                <td>
-                                    @String.Format("{0:0,0}", item.Tuition)<span>đ</span>
+                                    @Html.DisplayFor(modelItem => item.Literacy.Name)
                                 </td>
                                 <td>
                                     @Html.ActionLink("Sửa", "CreateOrUpdate", new { id = item.Id }) |
                                     @Html.ActionLink("Xem", "Details", new { id = item.Id }) |
-                                    @Html.ActionLink("Xóa", "Delete", new { id = item.Id })
+                                    @* @Html.ActionLink("Xóa", "Delete", new { id = item.Id }) *@
                                 </td>
                             </tr>
                         }

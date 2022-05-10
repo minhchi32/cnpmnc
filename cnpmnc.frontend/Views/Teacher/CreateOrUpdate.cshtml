@@ -1,0 +1,88 @@
+﻿@model cnpmnc.backend.DTOs.TeacherDTOs.TeacherCreateOrUpdateDTO
+
+@{
+    ViewData["Title"] = "CreateOrUpdate";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Thêm giảng viên mới</h6>
+            </div>
+            <div class="card-body">
+
+
+                <form asp-action="CreateOrUpdate" enctype="multipart/form-data" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    @if (@ViewBag.IsEdit)
+                    {
+                        <input type="hidden" asp-for="Id" />
+                    }
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Username" class="control-label"></label>
+                        <input asp-for="Username" class="form-control" />
+                        <span asp-validation-for="Username" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Password" class="control-label"></label>
+                        <input asp-for="Password" class="form-control" type="password"/>
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="IdCard" class="control-label"></label>
+                        <input asp-for="IdCard" class="form-control" />
+                        <span asp-validation-for="IdCard" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PhoneNumber" class="control-label"></label>
+                        <input asp-for="PhoneNumber" class="form-control" />
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="LiteracyId" class="control-label"></label>
+                        <select asp-for="LiteracyId" asp-items="@ViewBag.Literacy" class="form-control">
+                            <option>Please select one</option>
+                        </select>
+                        <span asp-validation-for="LiteracyId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                        <a class="btn btn-danger" asp-action="Index">Back</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- /.container-fluid -->
+</div>
+<!-- End of Main Content -->
+
+@section Scripts {
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+<!-- Bootstrap core JavaScript-->
+<script src="~/lib/Content/loginassets/vendor/jquery/jquery.min.js"></script>
+<script src="~/lib/Content/loginassets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="~/lib/Content/loginassets/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="~/lib/Content/loginassets/js/sb-admin-2.min.js"></script>
+
+<!-- Page level plugins -->
+<script src="~/lib/Content/loginassets/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="~/lib/Content/loginassets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="~/lib/Content/loginassets/js/demo/datatables-demo.js"></script>
+}

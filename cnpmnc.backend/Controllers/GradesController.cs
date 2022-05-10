@@ -21,11 +21,13 @@ public class GradesController : ControllerBase
 
     [HttpGet("paging")]
     public async Task<ActionResult<PagedResponseModel<GradeDTO>>> GetGrades(
+        int id,
         [FromQuery] GradeQueryCriteria criteria,
         CancellationToken cancellationToken)
     {
 
-        var responses = await _gradeService.GetByPageAsync(
+        var responses = await _gradeService.GetByPageByTeacherIdAsync(
+                                        id,
                                         criteria,
                                         cancellationToken);
         return Ok(responses);

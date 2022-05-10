@@ -10,6 +10,9 @@ namespace cnpmnc.frontend
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddTransient<ICourseService, CourseService>();
+            services.AddTransient<ITeacherService, TeacherService>();
+            services.AddTransient<ILiteracyService, LiteracyService>();
+            services.AddTransient<IGradeService, GradeService>();
             services.AddRazorPages();
         }
     }
