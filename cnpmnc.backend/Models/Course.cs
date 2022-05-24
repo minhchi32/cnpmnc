@@ -11,6 +11,7 @@ namespace cnpmnc.backend.Models
         public string StudyConditions { get; set; }
         public int Tuition { get; set; }
         public List<Grade> Grades { get; set; }
+        public List<Assignment> Assignments { get; set; }
         public bool IsDeleted { get; set; }
     }
 }

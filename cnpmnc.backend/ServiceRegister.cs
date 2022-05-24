@@ -19,6 +19,7 @@ namespace cnpmnc.backend
             services.AddTransient<ITeacherService, TeacherService>();
             services.AddTransient<IGradeService, GradeService>();
             services.AddTransient<ILiteracyService, LiteracyService>();
+            services.AddTransient<IAssignmentService, AssignmentService>();
         }
     }
 }

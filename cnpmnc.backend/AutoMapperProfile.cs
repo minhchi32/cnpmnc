@@ -1,4 +1,5 @@
-﻿using cnpmnc.backend.DTOs.CourseDTOs;
+﻿using cnpmnc.backend.DTOs.AssignmentDTOs;
+using cnpmnc.backend.DTOs.CourseDTOs;
 using cnpmnc.backend.DTOs.GradeDTOs;
 using cnpmnc.backend.DTOs.TeacherDTOs;
 using cnpmnc.backend.Models;
@@ -58,6 +59,21 @@ namespace cnpmnc.backend
 
             CreateMap<GradeDTO, Grade>()
                         .ReverseMap();
+
+            CreateMap<AssignmentDTO, Assignment>()
+                            .ForMember(src => src.IsDeleted, act => act.Ignore())
+                            .ReverseMap();
+
+            CreateMap<AssignmentCreateOrUpdateDTO, Assignment>()
+                .ForMember(src => src.CourseId, act => act.MapFrom(dest => dest.CourseId))
+                .ForMember(src => src.AssignToTeacherId, act => act.MapFrom(dest => dest.AssignToTeacherId))
+                .ForMember(src => src.AssignDate, act => act.MapFrom(dest => dest.AssignDate))
+                .ForMember(src => src.Note, act => act.MapFrom(dest => dest.Note))
+                .ForMember(src => src.Course, act => act.Ignore())
+                .ForMember(src => src.Teacher, act => act.Ignore())
+                .ForMember(src => src.State, act => act.Ignore())
+                .ForMember(src => src.IsDeleted, act => act.Ignore())
+                .ReverseMap();
         }
 
         private void FromDataAccessorLayer()
@@ -77,6 +93,13 @@ namespace cnpmnc.backend
                 .ReverseMap();
 
             CreateMap<Grade, GradeDTO>()
+                .ReverseMap();
+
+            CreateMap<Assignment, AssignmentCreateOrUpdateDTO>()
+                .ReverseMap();
+            CreateMap<AssignmentDTO, AssignmentCreateOrUpdateDTO>()
+                .ReverseMap();
+            CreateMap<Assignment, AssignmentDTO>()
                 .ReverseMap();
         }
     }

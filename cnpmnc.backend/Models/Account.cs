@@ -18,5 +18,6 @@ public class Account
     public int? NumberOfTeachingSessions { get; set; }
     public int? NumberOfBreaks { get; set; }
     public List<Grade>? Grades { get; set; }
+    public List<Assignment>? Assignments { get; set; }
     public bool IsDeleted { get; set; }
 }

@@ -22,6 +22,7 @@
             public const string NumberGreaterThanError = "{0} must be greater than {1}.";
             public const string SpecialCharacterError = "{0} must not have special character.";
             public const string EnumError = "{0} is not a one of the enums.";
+            public const string SelectDateGreaterThanOrEqualToday = "{0} must be greater than or equal today.";
         }
     }
 }

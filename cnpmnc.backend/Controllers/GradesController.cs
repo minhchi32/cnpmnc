@@ -26,8 +26,7 @@ public class GradesController : ControllerBase
         CancellationToken cancellationToken)
     {
 
-        var responses = await _gradeService.GetByPageByTeacherIdAsync(
-                                        id,
+        var responses = await _gradeService.GetByPageAsync(
                                         criteria,
                                         cancellationToken);
         return Ok(responses);
@@ -39,7 +38,8 @@ public class GradesController : ControllerBase
         CancellationToken cancellationToken)
     {
 
-        var responses = await _gradeService.GetByPageByTeacherIdAsync(id,
+        var responses = await _gradeService.GetByPageByTeacherIdAsync(
+                                        id,
                                         criteria,
                                         cancellationToken);
         return Ok(responses);

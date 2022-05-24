@@ -20,6 +20,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<Literacy> Literacies { get; set; }
     public DbSet<Schedule> Schedules { get; set; }
     public DbSet<SchoolShift> SchoolShifts { get; set; }
+    public DbSet<Assignment> Assignments { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -31,6 +32,7 @@ public class ApplicationDbContext : DbContext
         modelBuilder.ApplyConfiguration(new LiteracyConfiguration());
         modelBuilder.ApplyConfiguration(new ScheduleConfiguration());
         modelBuilder.ApplyConfiguration(new SchoolShiftConfiguration());
+        modelBuilder.ApplyConfiguration(new AssignmentConfiguration());
 
         //Seed Data
         modelBuilder.SeedAccountData();
