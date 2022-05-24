@@ -12,25 +12,22 @@ using cnpmnc.backend.Data;
 namespace cnpmnc.backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220421150020_SeedData")]
-    partial class SeedData
+    [Migration("20220523074858_DbInit")]
+    partial class DbInit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.4")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
-
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+                .HasAnnotation("ProductVersion", "6.0.5")
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("cnpmnc.backend.Models.Account", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                        .HasColumnType("int")
+                        .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("AccountType")
                         .ValueGeneratedOnAdd()
@@ -42,17 +39,17 @@ namespace cnpmnc.backend.Migrations
 
                     b.Property<string>("IdCard")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<int>("LiteracyId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<int?>("NumberOfBreaks")
                         .HasColumnType("int");
@@ -65,14 +62,14 @@ namespace cnpmnc.backend.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<int>("PhoneNumber")
                         .HasColumnType("int");
 
                     b.Property<string>("Username")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
@@ -147,22 +144,21 @@ namespace cnpmnc.backend.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                        .HasColumnType("int")
+                        .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("CourseId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("ExpiryDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<DateTime>("IssueDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
@@ -175,120 +171,120 @@ namespace cnpmnc.backend.Migrations
                         {
                             Id = 1,
                             CourseId = 1,
-                            ExpiryDate = new DateTime(2025, 4, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1546),
-                            IssueDate = new DateTime(2022, 4, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1538),
+                            ExpiryDate = new DateTime(2025, 5, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3069),
+                            IssueDate = new DateTime(2022, 5, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3059),
                             Name = "ReactJS"
                         },
                         new
                         {
                             Id = 2,
                             CourseId = 2,
-                            ExpiryDate = new DateTime(2025, 4, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1551),
-                            IssueDate = new DateTime(2022, 4, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1550),
+                            ExpiryDate = new DateTime(2025, 5, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3077),
+                            IssueDate = new DateTime(2022, 5, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3077),
                             Name = "NodeJS"
                         },
                         new
                         {
                             Id = 3,
                             CourseId = 3,
-                            ExpiryDate = new DateTime(2025, 4, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1553),
-                            IssueDate = new DateTime(2022, 4, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1552),
+                            ExpiryDate = new DateTime(2025, 5, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3079),
+                            IssueDate = new DateTime(2022, 5, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3078),
                             Name = "ASP.NET"
                         },
                         new
                         {
                             Id = 4,
                             CourseId = 4,
-                            ExpiryDate = new DateTime(2025, 4, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1554),
-                            IssueDate = new DateTime(2022, 4, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1554),
+                            ExpiryDate = new DateTime(2025, 5, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3080),
+                            IssueDate = new DateTime(2022, 5, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3080),
                             Name = "C#"
                         },
                         new
                         {
                             Id = 5,
                             CourseId = 5,
-                            ExpiryDate = new DateTime(2025, 4, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1556),
-                            IssueDate = new DateTime(2022, 4, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1555),
+                            ExpiryDate = new DateTime(2025, 5, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3081),
+                            IssueDate = new DateTime(2022, 5, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3081),
                             Name = "JavaScript"
                         },
                         new
                         {
                             Id = 6,
                             CourseId = 6,
-                            ExpiryDate = new DateTime(2025, 4, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1558),
-                            IssueDate = new DateTime(2022, 4, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1557),
+                            ExpiryDate = new DateTime(2025, 5, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3082),
+                            IssueDate = new DateTime(2022, 5, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3082),
                             Name = "Python"
                         },
                         new
                         {
                             Id = 7,
                             CourseId = 7,
-                            ExpiryDate = new DateTime(2025, 4, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1559),
-                            IssueDate = new DateTime(2022, 4, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1559),
+                            ExpiryDate = new DateTime(2025, 5, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3084),
+                            IssueDate = new DateTime(2022, 5, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3083),
                             Name = "React Native"
                         },
                         new
                         {
                             Id = 8,
                             CourseId = 8,
-                            ExpiryDate = new DateTime(2025, 4, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1561),
-                            IssueDate = new DateTime(2022, 4, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1560),
+                            ExpiryDate = new DateTime(2025, 5, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3085),
+                            IssueDate = new DateTime(2022, 5, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3085),
                             Name = "Golang"
                         },
                         new
                         {
                             Id = 9,
                             CourseId = 9,
-                            ExpiryDate = new DateTime(2025, 4, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1562),
-                            IssueDate = new DateTime(2022, 4, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1562),
+                            ExpiryDate = new DateTime(2025, 5, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3086),
+                            IssueDate = new DateTime(2022, 5, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3086),
                             Name = "VueJS"
                         },
                         new
                         {
                             Id = 10,
                             CourseId = 10,
-                            ExpiryDate = new DateTime(2025, 4, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1564),
-                            IssueDate = new DateTime(2022, 4, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1563),
+                            ExpiryDate = new DateTime(2025, 5, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3087),
+                            IssueDate = new DateTime(2022, 5, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3087),
                             Name = "Angular"
                         },
                         new
                         {
                             Id = 11,
                             CourseId = 11,
-                            ExpiryDate = new DateTime(2025, 4, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1566),
-                            IssueDate = new DateTime(2022, 4, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1565),
+                            ExpiryDate = new DateTime(2025, 5, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3088),
+                            IssueDate = new DateTime(2022, 5, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3088),
                             Name = "Flutter"
                         },
                         new
                         {
                             Id = 12,
                             CourseId = 12,
-                            ExpiryDate = new DateTime(2025, 4, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1567),
-                            IssueDate = new DateTime(2022, 4, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1567),
+                            ExpiryDate = new DateTime(2025, 5, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3089),
+                            IssueDate = new DateTime(2022, 5, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3089),
                             Name = "Java"
                         },
                         new
                         {
                             Id = 13,
                             CourseId = 13,
-                            ExpiryDate = new DateTime(2025, 4, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1569),
-                            IssueDate = new DateTime(2022, 4, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1568),
+                            ExpiryDate = new DateTime(2025, 5, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3091),
+                            IssueDate = new DateTime(2022, 5, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3090),
                             Name = "C++"
                         },
                         new
                         {
                             Id = 14,
                             CourseId = 14,
-                            ExpiryDate = new DateTime(2025, 4, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1570),
-                            IssueDate = new DateTime(2022, 4, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1570),
+                            ExpiryDate = new DateTime(2025, 5, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3095),
+                            IssueDate = new DateTime(2022, 5, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3094),
                             Name = "C"
                         },
                         new
                         {
                             Id = 15,
                             CourseId = 15,
-                            ExpiryDate = new DateTime(2026, 4, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1572),
-                            IssueDate = new DateTime(2022, 4, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1571),
+                            ExpiryDate = new DateTime(2026, 5, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3096),
+                            IssueDate = new DateTime(2022, 5, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3096),
                             Name = "C#"
                         });
                 });
@@ -297,21 +293,20 @@ namespace cnpmnc.backend.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                        .HasColumnType("int")
+                        .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Note")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<bool>("Status")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
+                        .HasColumnType("tinyint(1)")
                         .HasDefaultValue(false);
 
                     b.HasKey("Id");
@@ -346,34 +341,33 @@ namespace cnpmnc.backend.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                        .HasColumnType("int")
+                        .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Content")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Detail")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("StudyConditions")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<int>("Tuition")
                         .HasColumnType("int");
@@ -388,10 +382,10 @@ namespace cnpmnc.backend.Migrations
                             Id = 1,
                             Content = "1",
                             Detail = "1",
-                            EndDate = new DateTime(2022, 2, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1612),
+                            EndDate = new DateTime(2022, 3, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3132),
                             IsDeleted = false,
                             Name = "ReactJS",
-                            StartDate = new DateTime(2021, 12, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1610),
+                            StartDate = new DateTime(2022, 1, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3128),
                             StudyConditions = "1",
                             Tuition = 4000000
                         },
@@ -400,10 +394,10 @@ namespace cnpmnc.backend.Migrations
                             Id = 2,
                             Content = "1",
                             Detail = "1",
-                            EndDate = new DateTime(2022, 11, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1615),
+                            EndDate = new DateTime(2022, 12, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3135),
                             IsDeleted = false,
                             Name = "NodeJS",
-                            StartDate = new DateTime(2022, 5, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1614),
+                            StartDate = new DateTime(2022, 6, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3134),
                             StudyConditions = "1",
                             Tuition = 4500000
                         },
@@ -412,10 +406,10 @@ namespace cnpmnc.backend.Migrations
                             Id = 3,
                             Content = "1",
                             Detail = "1",
-                            EndDate = new DateTime(2021, 10, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1617),
+                            EndDate = new DateTime(2021, 11, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3137),
                             IsDeleted = false,
                             Name = "ASP.NET",
-                            StartDate = new DateTime(2021, 4, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1617),
+                            StartDate = new DateTime(2021, 5, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3136),
                             StudyConditions = "1",
                             Tuition = 3000000
                         },
@@ -424,10 +418,10 @@ namespace cnpmnc.backend.Migrations
                             Id = 4,
                             Content = "1",
                             Detail = "1",
-                            EndDate = new DateTime(2022, 7, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1619),
+                            EndDate = new DateTime(2022, 8, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3139),
                             IsDeleted = false,
                             Name = "C#",
-                            StartDate = new DateTime(2022, 4, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1619),
+                            StartDate = new DateTime(2022, 5, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3138),
                             StudyConditions = "1",
                             Tuition = 2000000
                         },
@@ -436,10 +430,10 @@ namespace cnpmnc.backend.Migrations
                             Id = 5,
                             Content = "1",
                             Detail = "1",
-                            EndDate = new DateTime(2022, 10, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1622),
+                            EndDate = new DateTime(2022, 11, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3140),
                             IsDeleted = false,
                             Name = "JavaScript",
-                            StartDate = new DateTime(2022, 7, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1621),
+                            StartDate = new DateTime(2022, 8, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3140),
                             StudyConditions = "1",
                             Tuition = 3500000
                         },
@@ -448,10 +442,10 @@ namespace cnpmnc.backend.Migrations
                             Id = 6,
                             Content = "1",
                             Detail = "1",
-                            EndDate = new DateTime(2022, 12, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1624),
+                            EndDate = new DateTime(2023, 1, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3142),
                             IsDeleted = false,
                             Name = "Python",
-                            StartDate = new DateTime(2022, 9, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1623),
+                            StartDate = new DateTime(2022, 10, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3141),
                             StudyConditions = "1",
                             Tuition = 2500000
                         },
@@ -460,10 +454,10 @@ namespace cnpmnc.backend.Migrations
                             Id = 7,
                             Content = "1",
                             Detail = "1",
-                            EndDate = new DateTime(2023, 1, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1626),
+                            EndDate = new DateTime(2023, 2, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3143),
                             IsDeleted = false,
                             Name = "React Native",
-                            StartDate = new DateTime(2022, 10, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1625),
+                            StartDate = new DateTime(2022, 11, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3143),
                             StudyConditions = "1",
                             Tuition = 5500000
                         },
@@ -472,10 +466,10 @@ namespace cnpmnc.backend.Migrations
                             Id = 8,
                             Content = "1",
                             Detail = "1",
-                            EndDate = new DateTime(2022, 11, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1628),
+                            EndDate = new DateTime(2022, 12, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3145),
                             IsDeleted = false,
                             Name = "Golang",
-                            StartDate = new DateTime(2022, 8, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1627),
+                            StartDate = new DateTime(2022, 9, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3144),
                             StudyConditions = "1",
                             Tuition = 5500000
                         },
@@ -484,10 +478,10 @@ namespace cnpmnc.backend.Migrations
                             Id = 9,
                             Content = "1",
                             Detail = "1",
-                            EndDate = new DateTime(2022, 8, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1630),
+                            EndDate = new DateTime(2022, 9, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3147),
                             IsDeleted = false,
                             Name = "VueJS",
-                            StartDate = new DateTime(2022, 5, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1629),
+                            StartDate = new DateTime(2022, 6, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3146),
                             StudyConditions = "1",
                             Tuition = 5000000
                         },
@@ -496,10 +490,10 @@ namespace cnpmnc.backend.Migrations
                             Id = 10,
                             Content = "1",
                             Detail = "1",
-                            EndDate = new DateTime(2022, 7, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1631),
+                            EndDate = new DateTime(2022, 8, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3148),
                             IsDeleted = false,
                             Name = "Angular",
-                            StartDate = new DateTime(2022, 4, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1631),
+                            StartDate = new DateTime(2022, 5, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3148),
                             StudyConditions = "1",
                             Tuition = 6000000
                         },
@@ -508,10 +502,10 @@ namespace cnpmnc.backend.Migrations
                             Id = 11,
                             Content = "1",
                             Detail = "1",
-                            EndDate = new DateTime(2022, 7, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1634),
+                            EndDate = new DateTime(2022, 8, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3150),
                             IsDeleted = false,
                             Name = "Flutter",
-                            StartDate = new DateTime(2022, 4, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1633),
+                            StartDate = new DateTime(2022, 5, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3150),
                             StudyConditions = "1",
                             Tuition = 6000000
                         },
@@ -520,10 +514,10 @@ namespace cnpmnc.backend.Migrations
                             Id = 12,
                             Content = "1",
                             Detail = "1",
-                            EndDate = new DateTime(2022, 1, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1636),
+                            EndDate = new DateTime(2022, 2, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3152),
                             IsDeleted = false,
                             Name = "Java",
-                            StartDate = new DateTime(2021, 11, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1635),
+                            StartDate = new DateTime(2021, 12, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3151),
                             StudyConditions = "1",
                             Tuition = 1500000
                         },
@@ -532,10 +526,10 @@ namespace cnpmnc.backend.Migrations
                             Id = 13,
                             Content = "1",
                             Detail = "1",
-                            EndDate = new DateTime(2022, 1, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1638),
+                            EndDate = new DateTime(2022, 2, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3153),
                             IsDeleted = false,
                             Name = "C++",
-                            StartDate = new DateTime(2021, 10, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1637),
+                            StartDate = new DateTime(2021, 11, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3152),
                             StudyConditions = "1",
                             Tuition = 1500000
                         },
@@ -544,10 +538,10 @@ namespace cnpmnc.backend.Migrations
                             Id = 14,
                             Content = "1",
                             Detail = "1",
-                            EndDate = new DateTime(2021, 12, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1640),
+                            EndDate = new DateTime(2022, 1, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3155),
                             IsDeleted = false,
                             Name = "C",
-                            StartDate = new DateTime(2021, 9, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1639),
+                            StartDate = new DateTime(2021, 10, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3154),
                             StudyConditions = "1",
                             Tuition = 1000000
                         },
@@ -556,10 +550,10 @@ namespace cnpmnc.backend.Migrations
                             Id = 15,
                             Content = "1",
                             Detail = "1",
-                            EndDate = new DateTime(2022, 8, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1642),
+                            EndDate = new DateTime(2022, 9, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3156),
                             IsDeleted = false,
                             Name = "C#",
-                            StartDate = new DateTime(2022, 4, 21, 22, 0, 19, 929, DateTimeKind.Local).AddTicks(1642),
+                            StartDate = new DateTime(2022, 5, 23, 14, 48, 58, 364, DateTimeKind.Local).AddTicks(3156),
                             StudyConditions = "1",
                             Tuition = 5500000
                         });
@@ -569,16 +563,15 @@ namespace cnpmnc.backend.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                        .HasColumnType("int")
+                        .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("CourseId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<int>("NumberOfSessions")
                         .HasColumnType("int");
@@ -874,13 +867,12 @@ namespace cnpmnc.backend.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                        .HasColumnType("int")
+                        .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
@@ -908,9 +900,8 @@ namespace cnpmnc.backend.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                        .HasColumnType("int")
+                        .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("ClassroomId")
                         .HasColumnType("int");
@@ -945,16 +936,15 @@ namespace cnpmnc.backend.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                        .HasColumnType("int")
+                        .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
 
                     b.Property<TimeSpan>("EndTime")
                         .HasColumnType("time");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<TimeSpan>("StartTime")
                         .HasColumnType("time");

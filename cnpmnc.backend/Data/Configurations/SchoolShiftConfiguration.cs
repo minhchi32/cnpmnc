@@ -10,7 +10,7 @@ public class SchoolShiftConfiguration : IEntityTypeConfiguration<SchoolShift>
     {
         builder.ToTable("SchoolShifts");
         builder.HasKey(b => b.Id);
-        builder.Property(b => b.Id).UseIdentityColumn();
+        builder.Property(b => b.Id).UseMySqlIdentityColumn();
         builder.Property(b => b.Name).IsRequired();
         builder.Property(b => b.StartTime).IsRequired();
         builder.Property(b => b.EndTime).IsRequired();

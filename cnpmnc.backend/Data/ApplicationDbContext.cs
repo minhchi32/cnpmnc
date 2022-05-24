@@ -3,12 +3,14 @@ using cnpmnc.backend.Models;
 using cnpmnc.backend.SeedData;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-
 namespace cnpmnc.backend.Data;
 public class ApplicationDbContext : DbContext
 {
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+    protected readonly IConfiguration Configuration;
+
+    public ApplicationDbContext(IConfiguration configuration)
     {
+        Configuration = configuration;
     }
     public DbSet<Account> Accounts { get; set; }
     public DbSet<Certificate> Certificates { get; set; }
@@ -39,5 +41,10 @@ public class ApplicationDbContext : DbContext
         modelBuilder.SeedLiteracyData();
         modelBuilder.SeedScheduleData();
         modelBuilder.SeedSchoolShiftData();
+    }
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        var connectionString = Configuration.GetConnectionString("cnpmncDb");
+        optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
     }
 }

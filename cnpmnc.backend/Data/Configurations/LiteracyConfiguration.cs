@@ -10,7 +10,7 @@ public class LiteracyConfiguration : IEntityTypeConfiguration<Literacy>
     {
         builder.ToTable("Literacies");
         builder.HasKey(b => b.Id);
-        builder.Property(b => b.Id).UseIdentityColumn();
+        builder.Property(b => b.Id).UseMySqlIdentityColumn();
         builder.Property(b => b.Name).IsRequired();
     }
 }

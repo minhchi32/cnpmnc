@@ -10,7 +10,7 @@ public class ScheduleConfiguration : IEntityTypeConfiguration<Schedule>
     {
         builder.ToTable("Schedules");
         builder.HasKey(b => b.Id);
-        builder.Property(b => b.Id).UseIdentityColumn();
+        builder.Property(b => b.Id).UseMySqlIdentityColumn();
         builder.Property(b => b.GradeId).IsRequired();
         builder.HasOne(c => c.Grade).WithMany(x => x.Schedules).HasForeignKey(x => x.GradeId);
         builder.Property(b => b.ClassroomId).IsRequired();

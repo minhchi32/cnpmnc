@@ -11,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.AddDbContext<ApplicationDbContext>(option =>
-    option.UseSqlServer(builder.Configuration.GetConnectionString("cnpmncDb")));
+    option.UseMySql(builder.Configuration.GetConnectionString("cnpmncDb"), new MySqlServerVersion(new Version(8, 0, 11))));
 // Add services to the container.
 
 builder.Services.AddHttpContextAccessor();

@@ -10,7 +10,7 @@ public class CourseConfiguration : IEntityTypeConfiguration<Course>
     {
         builder.ToTable("Courses");
         builder.HasKey(b => b.Id);
-        builder.Property(b => b.Id).UseIdentityColumn();
+        builder.Property(b => b.Id).UseMySqlIdentityColumn();
         builder.Property(b => b.Name).IsRequired();
         builder.Property(b => b.Content).IsRequired();
         builder.Property(b => b.Detail).IsRequired();
