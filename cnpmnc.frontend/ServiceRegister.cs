@@ -13,6 +13,7 @@ namespace cnpmnc.frontend
             services.AddTransient<ITeacherService, TeacherService>();
             services.AddTransient<ILiteracyService, LiteracyService>();
             services.AddTransient<IGradeService, GradeService>();
+            services.AddTransient<IAuthorizeService, AuthorizeService>();
             services.AddRazorPages();
         }
     }

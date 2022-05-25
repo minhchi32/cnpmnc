@@ -14,52 +14,67 @@ public class CourseController : Controller
     }
     public async Task<IActionResult> Index(string keyword, int page = 1, int limit = 5)
     {
-        var request = new CourseQueryCriteria()
+        if (HttpContext.Session.GetString("User") == null)
         {
-            Search = keyword,
-            Limit = limit,
-            Page = page
-        };
-        var data = await _courseService.GetByPageAsync(request, new CancellationToken());
-        ViewBag.Keyword = keyword;
-
-
-        if (TempData["result"] != null)
-        {
-            ViewBag.SuccessMsg = TempData["result"];
+            return RedirectToAction("Index", "Authorize");
         }
-        return View(data);
+        else
+        {
+            var request = new CourseQueryCriteria()
+            {
+                Search = keyword,
+                Limit = limit,
+                Page = page
+            };
+            var data = await _courseService.GetByPageAsync(request, new CancellationToken());
+            ViewBag.Keyword = keyword;
+
+
+            if (TempData["result"] != null)
+            {
+                ViewBag.SuccessMsg = TempData["result"];
+            }
+            HttpContext.Session.GetString("User");
+            return View(data);
+        }
     }
 
     [HttpGet]
     public async Task<IActionResult> CreateOrUpdate(int? id)
     {
-        ViewBag.PageName = (id == null ? "Create" : "Edit") + " Course";
-        ViewBag.IsEdit = id == null ? false : true;
-        if (id == null)
+        if (HttpContext.Session.GetString("User") == null)
         {
-            return View();
+            return RedirectToAction("Index", "Authorize");
         }
         else
         {
-            var course = await _courseService.GetById((int)id);
-
-            if (course == null)
+            ViewBag.PageName = (id == null ? "Create" : "Edit") + " Course";
+            ViewBag.IsEdit = id == null ? false : true;
+            if (id == null)
             {
-                return NotFound();
+                return View();
             }
-            CourseCreateOrUpdateDTO courseCreateOrUpdateDTO = new CourseCreateOrUpdateDTO()
+            else
             {
-                Id = course.Id,
-                Name = course.Name,
-                Content = course.Content,
-                Detail = course.Detail,
-                StartDate = course.StartDate,
-                EndDate = course.EndDate,
-                StudyConditions = course.StudyConditions,
-                Tuition = course.Tuition,
-            };
-            return View(courseCreateOrUpdateDTO);
+                var course = await _courseService.GetById((int)id);
+
+                if (course == null)
+                {
+                    return NotFound();
+                }
+                CourseCreateOrUpdateDTO courseCreateOrUpdateDTO = new CourseCreateOrUpdateDTO()
+                {
+                    Id = course.Id,
+                    Name = course.Name,
+                    Content = course.Content,
+                    Detail = course.Detail,
+                    StartDate = course.StartDate,
+                    EndDate = course.EndDate,
+                    StudyConditions = course.StudyConditions,
+                    Tuition = course.Tuition,
+                };
+                return View(courseCreateOrUpdateDTO);
+            }
         }
     }
 
@@ -97,24 +112,38 @@ public class CourseController : Controller
     }
     public async Task<IActionResult> Details(int id)
     {
-        var course = await _courseService.GetById(id);
-        if (course == null)
+        if (HttpContext.Session.GetString("User") == null)
         {
-            return NotFound();
+            return RedirectToAction("Index", "Authorize");
         }
-        return View(course);
+        else
+        {
+            var course = await _courseService.GetById(id);
+            if (course == null)
+            {
+                return NotFound();
+            }
+            return View(course);
+        }
     }
 
     [HttpGet]
     public async Task<IActionResult> Delete(int? id)
     {
-        var course = await _courseService.GetById((int)id);
-
-        if (course == null)
+        if (HttpContext.Session.GetString("User") == null)
         {
-            return NotFound();
+            return RedirectToAction("Index", "Authorize");
         }
-        return View(course);
+        else
+        {
+            var course = await _courseService.GetById((int)id);
+
+            if (course == null)
+            {
+                return NotFound();
+            }
+            return View(course);
+        }
     }
 
     [HttpPost]

@@ -23,62 +23,76 @@ public class TeacherController : Controller
     }
     public async Task<IActionResult> Index(string keyword, int page = 1, int limit = 5)
     {
-        var request = new TeacherQueryCriteria()
+        if (HttpContext.Session.GetString("User") == null)
         {
-            Search = keyword,
-            Limit = limit,
-            Page = page
-        };
-        var data = await _teacherService.GetByPageAsync(request, new CancellationToken());
-        ViewBag.Keyword = keyword;
-
-
-        if (TempData["result"] != null)
-        {
-            ViewBag.SuccessMsg = TempData["result"];
+            return RedirectToAction("Index", "Authorize");
         }
-        return View(data);
+        else
+        {
+            var request = new TeacherQueryCriteria()
+            {
+                Search = keyword,
+                Limit = limit,
+                Page = page
+            };
+            var data = await _teacherService.GetByPageAsync(request, new CancellationToken());
+            ViewBag.Keyword = keyword;
+
+
+            if (TempData["result"] != null)
+            {
+                ViewBag.SuccessMsg = TempData["result"];
+            }
+            return View(data);
+        }
     }
 
     [HttpGet]
     public async Task<IActionResult> CreateOrUpdate(int? id)
     {
-        ViewBag.PageName = (id == null ? "Create" : "Edit") + " Teacher";
-        ViewBag.IsEdit = id == null ? false : true;
-
-        var listLiteracy = await _literacyService.GetAll();
-        var literacies = new List<SelectListItem>();
-        foreach (var item in listLiteracy)
+        if (HttpContext.Session.GetString("User") == null)
         {
-            literacies.Add(new SelectListItem()
-            {
-                Text = item.Name,
-                Value = item.Id.ToString()
-            });
-        }
-        ViewBag.Literacy = literacies;
-        if (id == null)
-        {
-            return View();
+            return RedirectToAction("Index", "Authorize");
         }
         else
         {
-            var teacher = await _teacherService.GetById((int)id);
+            ViewBag.PageName = (id == null ? "Create" : "Edit") + " Teacher";
+            ViewBag.IsEdit = id == null ? false : true;
 
-            if (teacher == null)
+            var listLiteracy = await _literacyService.GetAll();
+            var literacies = new List<SelectListItem>();
+            foreach (var item in listLiteracy)
             {
-                return NotFound();
+                literacies.Add(new SelectListItem()
+                {
+                    Text = item.Name,
+                    Value = item.Id.ToString()
+                });
             }
-            TeacherCreateOrUpdateDTO teacherCreateOrUpdateDTO = new TeacherCreateOrUpdateDTO()
+            ViewBag.Literacy = literacies;
+            if (id == null)
             {
-                Id = teacher.Id,
-                Name = teacher.Name,
-                Username = teacher.Username,
-                IdCard = teacher.IdCard,
-                PhoneNumber = teacher.PhoneNumber,
-                LiteracyId = teacher.LiteracyId,
-            };
-            return View(teacherCreateOrUpdateDTO);
+                return View();
+            }
+            else
+            {
+                var teacher = await _teacherService.GetById((int)id);
+
+                if (teacher == null)
+                {
+                    return NotFound();
+                }
+                TeacherCreateOrUpdateDTO teacherCreateOrUpdateDTO = new TeacherCreateOrUpdateDTO()
+                {
+                    Id = teacher.Id,
+                    Name = teacher.Name,
+                    Username = teacher.Username,
+                    IdCard = teacher.IdCard,
+                    PhoneNumber = teacher.PhoneNumber,
+                    LiteracyId = teacher.LiteracyId,
+                };
+                return View(teacherCreateOrUpdateDTO);
+            }
         }
     }
 
@@ -116,41 +130,55 @@ public class TeacherController : Controller
     }
     public async Task<IActionResult> Details(int id, string keyword, int page = 1, int limit = 5)
     {
-        var teacher = await _teacherService.GetById(id);
-        if (teacher == null)
+        if (HttpContext.Session.GetString("User") == null)
         {
-            return NotFound();
+            return RedirectToAction("Index", "Authorize");
         }
-        ViewBag.teacher = teacher;
-        // return View(teacher);
-
-        var request = new GradeQueryCriteria()
+        else
         {
-            Search = keyword,
-            Limit = limit,
-            Page = page
-        };
-        var data = await _gradeService.GetByPageByIdAsync(id, request, new CancellationToken());
-        ViewBag.Keyword = keyword;
+            var teacher = await _teacherService.GetById(id);
+            if (teacher == null)
+            {
+                return NotFound();
+            }
+            ViewBag.teacher = teacher;
+            // return View(teacher);
+
+            var request = new GradeQueryCriteria()
+            {
+                Search = keyword,
+                Limit = limit,
+                Page = page
+            };
+            var data = await _gradeService.GetByPageByIdAsync(id, request, new CancellationToken());
+            ViewBag.Keyword = keyword;
 
 
-        if (TempData["result"] != null)
-        {
-            ViewBag.SuccessMsg = TempData["result"];
+            if (TempData["result"] != null)
+            {
+                ViewBag.SuccessMsg = TempData["result"];
+            }
+            return View(data);
         }
-        return View(data);
     }
 
     [HttpGet]
     public async Task<IActionResult> Delete(int? id)
     {
-        var teacher = await _teacherService.GetById((int)id);
-
-        if (teacher == null)
+        if (HttpContext.Session.GetString("User") == null)
         {
-            return NotFound();
+            return RedirectToAction("Index", "Authorize");
         }
-        return View(teacher);
+        else
+        {
+            var teacher = await _teacherService.GetById((int)id);
+
+            if (teacher == null)
+            {
+                return NotFound();
+            }
+            return View(teacher);
+        }
     }
 
     [HttpPost]
