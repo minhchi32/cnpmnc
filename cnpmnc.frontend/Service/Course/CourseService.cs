@@ -1,5 +1,5 @@
 using System.Text;
-using cnpmnc.backend.DTOs.TeacherDTOs;
+using cnpmnc.backend.DTOs.CourseDTOs;
 using cnpmnc.shared;
 using cnpmnc.shared.Constants;
 using Newtonsoft.Json;
@@ -7,14 +7,14 @@ using Newtonsoft.Json;
 namespace cnpmnc.frontend.Service
 
 {
-    public class TeacherService : ITeacherService
+    public class CourseService : ICourseService
     {
 
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly IConfiguration _configuration;
 
-        public TeacherService(
+        public CourseService(
             IHttpClientFactory httpClientFactory,
             IHttpContextAccessor httpContextAccessor,
             IConfiguration configuration)
@@ -23,35 +23,35 @@ namespace cnpmnc.frontend.Service
             _configuration = configuration;
             _httpClientFactory = httpClientFactory;
         }
-        public async Task<PagedResponseModel<TeacherDTO>> GetByPageAsync(TeacherQueryCriteria queryCriteria, CancellationToken cancellationToken)
+        public async Task<PagedResponseModel<CourseDTO>> GetByPageAsync(CourseQueryCriteria queryCriteria, CancellationToken cancellationToken)
         {
             var client = _httpClientFactory.CreateClient();
             client.BaseAddress = new Uri(_configuration[ConfigurationConstants.BackendEndPoint]);
             var data = await client.GetAsync(
-                $"/api/teachers/paging?Page={queryCriteria.Page}" +
+                $"/api/courses/paging?Page={queryCriteria.Page}" +
                 $"&limit={queryCriteria.Limit}" +
                 $"&sortColumn={queryCriteria.SortColumn}" +
                 $"&sortOrder={queryCriteria.SortOrder}" +
                 $"&search={queryCriteria.Search}");
             var body = await data.Content.ReadAsStringAsync();
-            var teachers = JsonConvert.DeserializeObject<PagedResponseModel<TeacherDTO>>(body);
-            return teachers;
+            var courses = JsonConvert.DeserializeObject<PagedResponseModel<CourseDTO>>(body);
+            return courses;
         }
-        public async Task<TeacherDTO> CreateOrUpdate(TeacherCreateOrUpdateDTO request, int id = 0)
+        public async Task<CourseDTO> CreateOrUpdate(CourseCreateOrUpdateDTO request, int id = 0)
         {
             var client = _httpClientFactory.CreateClient();
             client.BaseAddress = new Uri(_configuration[ConfigurationConstants.BackendEndPoint]);
             var json = JsonConvert.SerializeObject(request);
             var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var response = id == 0 ? await client.PostAsync($"/api/teachers/", httpContent)
-                                    : await client.PutAsync($"/api/teachers/{id}", httpContent);
+            var response = id == 0 ? await client.PostAsync($"/api/courses/", httpContent)
+                                    : await client.PutAsync($"/api/courses/{id}", httpContent);
             var result = await response.Content.ReadAsStringAsync();
 
             if (response.IsSuccessStatusCode)
-                return JsonConvert.DeserializeObject<TeacherDTO>(result);
+                return JsonConvert.DeserializeObject<CourseDTO>(result);
 
-            return JsonConvert.DeserializeObject<TeacherDTO>(result);
+            return JsonConvert.DeserializeObject<CourseDTO>(result);
         }
 
         public async Task<bool> Delete(int id)
@@ -59,7 +59,7 @@ namespace cnpmnc.frontend.Service
             var client = _httpClientFactory.CreateClient();
             client.BaseAddress = new Uri(_configuration[ConfigurationConstants.BackendEndPoint]);
 
-            var response = await client.DeleteAsync($"/api/teachers/{id}");
+            var response = await client.DeleteAsync($"/api/courses/{id}");
             var result = await response.Content.ReadAsStringAsync();
 
             if (response.IsSuccessStatusCode)
@@ -68,17 +68,28 @@ namespace cnpmnc.frontend.Service
             return JsonConvert.DeserializeObject<bool>(result);
         }
 
-        public async Task<TeacherDTO> GetById(int id)
+        public async Task<CourseDTO> GetById(int id)
         {
             var client = _httpClientFactory.CreateClient();
             client.BaseAddress = new Uri(_configuration[ConfigurationConstants.BackendEndPoint]);
 
-            var response = await client.GetAsync($"/api/teachers/{id}");
+            var response = await client.GetAsync($"/api/courses/{id}");
             var result = await response.Content.ReadAsStringAsync();
             if (response.IsSuccessStatusCode)
-                return JsonConvert.DeserializeObject<TeacherDTO>(result);
+                return JsonConvert.DeserializeObject<CourseDTO>(result);
 
             return null;
+        }
+
+        public async Task<List<CourseDTO>> GetAll()
+        {
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_configuration[ConfigurationConstants.BackendEndPoint]);
+            var data = await client.GetAsync(
+                $"/api/courses");
+            var body = await data.Content.ReadAsStringAsync();
+            var courses = JsonConvert.DeserializeObject<List<CourseDTO>>(body);
+            return courses;
         }
     }
 }

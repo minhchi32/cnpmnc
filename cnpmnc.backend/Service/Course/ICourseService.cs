@@ -7,7 +7,7 @@ namespace cnpmnc.backend.Service
 
     public interface ICourseService
     {
-        Task<List<Course>> GetAll();
+        Task<List<CourseDTO>> GetAll();
         Task<PagedResponseModel<CourseDTO>> GetByPageAsync(CourseQueryCriteria queryCriteria, CancellationToken cancellationToken);
         Task<CourseDTO> GetById(int id);
         Task<CourseDTO> Create(CourseCreateOrUpdateDTO request);

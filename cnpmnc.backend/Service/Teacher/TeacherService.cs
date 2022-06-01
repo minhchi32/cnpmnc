@@ -33,7 +33,7 @@ class TeacherService : ITeacherService
 
         var teachers = await query
             .AsNoTracking()
-            .Include(x=>x.Literacy)
+            .Include(x => x.Literacy)
             .PaginateAsync(
                 queryCriteria,
                 cancellationToken);
@@ -82,9 +82,11 @@ class TeacherService : ITeacherService
         return teacherDelete.IsDeleted;
     }
 
-    public Task<List<Account>> GetAll()
+    public async Task<List<TeacherDTO>> GetAll()
     {
-        throw new NotImplementedException();
+        var query = Filter(
+            _teacherRepository.Entities.AsQueryable(), new TeacherQueryCriteria());
+        return _mapper.Map<List<TeacherDTO>>(query);
     }
 
     public async Task<TeacherDTO> GetById(int id)

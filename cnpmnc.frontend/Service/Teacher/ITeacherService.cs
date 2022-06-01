@@ -9,5 +9,7 @@ namespace cnpmnc.frontend.Service
         Task<TeacherDTO> GetById(int id);
         Task<TeacherDTO> CreateOrUpdate(TeacherCreateOrUpdateDTO request, int id = 0);
         Task<bool> Delete(int id);
+        Task<List<TeacherDTO>> GetAll();
+
     }
 }

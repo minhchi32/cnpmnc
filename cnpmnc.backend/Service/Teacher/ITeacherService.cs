@@ -7,7 +7,7 @@ namespace cnpmnc.backend.Service
 
     public interface ITeacherService
     {
-        Task<List<Account>> GetAll();
+        Task<List<TeacherDTO>> GetAll();
         Task<PagedResponseModel<TeacherDTO>> GetByPageAsync(TeacherQueryCriteria queryCriteria, CancellationToken cancellationToken);
         Task<TeacherDTO> GetById(int id);
         Task<TeacherDTO> Create(TeacherCreateOrUpdateDTO request);

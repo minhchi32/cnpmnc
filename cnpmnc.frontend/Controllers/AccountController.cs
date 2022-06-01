@@ -2,6 +2,7 @@
 using cnpmnc.backend.DTOs.GradeDTOs;
 using cnpmnc.backend.DTOs.TeacherDTOs;
 using cnpmnc.frontend.Service;
+using cnpmnc.shared.Enums;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -12,15 +13,18 @@ public class AccountController : Controller
     private readonly ITeacherService _teacherService;
     private readonly ILiteracyService _literacyService;
     private readonly IGradeService _gradeService;
+    private readonly IAssignmentService _assignmentService;
 
     public AccountController(
         ITeacherService teacherService,
         ILiteracyService literacyService,
-        IGradeService gradeService)
+        IGradeService gradeService,
+        IAssignmentService assignmentService)
     {
         _teacherService = teacherService;
         _literacyService = literacyService;
         _gradeService = gradeService;
+        _assignmentService = assignmentService;
     }
 
 
@@ -80,10 +84,6 @@ public class AccountController : Controller
             });
         }
         ViewBag.Literacy = literacies;
-        //if (String.IsNullOrEmpty(request.Password))
-        //{
-        //    request.Password = teacher.pa
-        //}
         if (!ModelState.IsValid)
             return View(request);
         var result = await _teacherService.CreateOrUpdate(request, request.Id);
@@ -93,7 +93,7 @@ public class AccountController : Controller
             return RedirectToAction("UpdateInfo");
         }
 
-        ModelState.AddModelError("","Cập nhật thông tin thất bại");
+        ModelState.AddModelError("", "Cập nhật thông tin thất bại");
         return View(request);
     }
     public async Task<IActionResult> ListGrade(string keyword, int page = 1, int limit = 5)
@@ -116,26 +116,50 @@ public class AccountController : Controller
             return View(data);
         }
     }
-    //public async Task<IActionResult> ListAssignment(string keyword, int page = 1, int limit = 5)
-    //{
-    //    if (HttpContext.Session.GetString("User") == null)
-    //    {
-    //        return RedirectToAction("Index", "Authorize");
-    //    }
-    //    else
-    //    {
-    //        var request = new AssignmentQueryCriteria()
-    //        {
-    //            Search = keyword,
-    //            Limit = limit,
-    //            Page = page
-    //        };
-    //        var data = await _assignmentService.GetByPageByIdAsync((int)HttpContext.Session.GetInt32("UserID"), request, new CancellationToken());
-    //        ViewBag.Keyword = keyword;
+    public async Task<IActionResult> ListAssignment(string keyword, int page = 1, int limit = 5)
+    {
+        if (HttpContext.Session.GetString("User") == null)
+        {
+            return RedirectToAction("Index", "Authorize");
+        }
+        else
+        {
+            if (TempData["result"] != null)
+            {
+                ViewBag.SuccessMsg = TempData["result"];
+            }
+            var request = new AssignmentQueryCriteria()
+            {
+                Search = keyword,
+                Limit = limit,
+                Page = page
+            };
+            var data = await _assignmentService.GetByPageByIdAsync((int)HttpContext.Session.GetInt32("UserID"), request, new CancellationToken());
+            ViewBag.Keyword = keyword;
 
-    //        return View(data);
-    //    }
-    //}
+            return View(data);
+        }
+    }
+    public async Task<IActionResult> RespondToAssignment(int assignmentId, AssignmentResponseEnumDto respond)
+    {
+        if (HttpContext.Session.GetString("User") == null)
+        {
+            return RedirectToAction("Index", "Authorize");
+        }
+        else
+        {
+            string result = respond == AssignmentResponseEnumDto.Accepted ? "Đồng ý" : "Hủy bỏ";
+            var data = await _assignmentService.RespondToAssignment((int)HttpContext.Session.GetInt32("UserID"), assignmentId, respond);
+            if (data.State!=AssignmentStateEnumDto.WaitingForAcceptance)
+            {
+                TempData["result"] = $"{result} thành công";
+                return RedirectToAction("ListAssignment");
+            }
+
+            ModelState.AddModelError("", $"{result} thất bại");
+            return RedirectToAction("ListAssignment");
+        }
+    }
 
 }
 

@@ -1,5 +1,4 @@
 using cnpmnc.backend.DTOs.AssignmentDTOs;
-using cnpmnc.backend.DTOs.GradeDTOs;
 using cnpmnc.backend.Service;
 using cnpmnc.shared;
 using EnsureThat;
@@ -34,7 +33,7 @@ public class AssignmentsController : ControllerBase
     }
 
     [HttpGet("paging/{id}")]
-    public async Task<ActionResult<PagedResponseModel<AssignmentDTO>>> GetGradeByTeacherId(int id,
+    public async Task<ActionResult<PagedResponseModel<AssignmentDTO>>> GetAssignmentByTeacherId(int id,
         [FromQuery] AssignmentQueryCriteria criteria,
         CancellationToken cancellationToken)
     {
@@ -112,7 +111,7 @@ public class AssignmentsController : ControllerBase
         }
     }
 
-    [HttpPost("respond")]
+    [HttpPut("respond")]
     public async Task<ActionResult<AssignmentDTO>> RespondToAssignment(
         int userId,
         [FromBody] AssignmentResponseDTO dto)

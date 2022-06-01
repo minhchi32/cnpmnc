@@ -94,9 +94,11 @@ class CourseService : ICourseService
         return courseDelete.IsDeleted;
     }
 
-    public Task<List<Course>> GetAll()
+    public async Task<List<CourseDTO>> GetAll()
     {
-        throw new NotImplementedException();
+        var query = Filter(
+            _courseRepository.Entities.AsQueryable(), new CourseQueryCriteria());
+        return _mapper.Map<List<CourseDTO>>(query);
     }
 
     public async Task<CourseDTO> GetById(int id)

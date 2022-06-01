@@ -31,6 +31,13 @@ public class CoursesController : ControllerBase
         return Ok(responses);
     }
 
+    [HttpGet]
+    public async Task<ActionResult<List<CourseDTO>>> GetAll()
+    {
+        var responses = await _courseService.GetAll();
+        return Ok(responses);
+    }
+
     [HttpGet("{id}")]
     public async Task<ActionResult<PagedResponseModel<CourseDTO>>> GetCourse(int id)
     {

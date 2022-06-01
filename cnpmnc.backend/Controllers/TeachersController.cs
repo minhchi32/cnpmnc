@@ -1,4 +1,3 @@
-using cnpmnc.backend.DTOs.CourseDTOs;
 using cnpmnc.backend.DTOs.TeacherDTOs;
 using cnpmnc.backend.Service;
 using cnpmnc.shared;
@@ -38,6 +37,14 @@ public class TeachersController : ControllerBase
         var responses = await _teacherService.GetById(id);
         return Ok(responses);
     }
+
+    [HttpGet]
+    public async Task<ActionResult<List<TeacherDTO>>> GetAll()
+    {
+        var responses = await _teacherService.GetAll();
+        return Ok(responses);
+    }
+
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] TeacherCreateOrUpdateDTO createDTO)
     {

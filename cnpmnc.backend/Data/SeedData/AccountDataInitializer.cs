@@ -12,7 +12,7 @@ public static class AccountDataInitializer
             new Account
             {
                 Id = 1,
-                Name = "1",
+                Name = "admin",
                 Username = "admin",
                 Password = "1",
                 AccountType = AccountType.Admin,
