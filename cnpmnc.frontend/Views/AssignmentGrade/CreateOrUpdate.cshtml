@@ -1,4 +1,4 @@
-﻿@model cnpmnc.backend.DTOs.CourseDTOs.CourseCreateOrUpdateDTO
+@model cnpmnc.backend.DTOs.AssignmentGradeDTOs.AssignmentGradeCreateOrUpdateDTO
 
 @{
     ViewData["Title"] = "CreateOrUpdate";
@@ -12,7 +12,7 @@
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Thêm khóa học mới</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Thêm phân công mới</h6>
             </div>
             <div class="card-body">
 
@@ -24,29 +24,23 @@
                         <input type="hidden" asp-for="Id" />
                     }
                     <div class="form-group">
-                        <label asp-for="Name" class="control-label"></label>
-                        <input asp-for="Name" class="form-control" />
-                        <span asp-validation-for="Name" class="text-danger"></span>
+                        <label asp-for="CourseId" class="control-label"></label>
+                        <select asp-for="CourseId" asp-items="@ViewBag.Course" class="form-control">
+                            <option>Please select one</option>
+                        </select>
+                        <span asp-validation-for="CourseId" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Content" class="control-label"></label>
-                        <input asp-for="Content" class="form-control" />
-                        <span asp-validation-for="Content" class="text-danger"></span>
+                        <label asp-for="AssignToTeacherId" class="control-label"></label>
+                        <select asp-for="AssignToTeacherId" asp-items="@ViewBag.Teacher" class="form-control">
+                            <option>Please select one</option>
+                        </select>
+                        <span asp-validation-for="AssignToTeacherId" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Detail" class="control-label"></label>
-                        <input asp-for="Detail" class="form-control" />
-                        <span asp-validation-for="Detail" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="StudyConditions" class="control-label"></label>
-                        <input asp-for="StudyConditions" class="form-control" />
-                        <span asp-validation-for="StudyConditions" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Tuition" class="control-label"></label>
-                        <input asp-for="Tuition" class="form-control" />
-                        <span asp-validation-for="Tuition" class="text-danger"></span>
+                        <label asp-for="Note" class="control-label"></label>
+                        <input asp-for="Note" class="form-control" />
+                        <span asp-validation-for="Note" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <input type="submit" value="Lưu" class="btn btn-primary" />

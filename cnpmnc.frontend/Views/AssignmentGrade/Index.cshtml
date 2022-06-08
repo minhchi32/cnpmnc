@@ -1,7 +1,8 @@
-﻿@using cnpmnc.shared
+@using cnpmnc.shared
 @using Microsoft.AspNetCore.Http
+@using cnpmnc.shared.Enums
 @inject IHttpContextAccessor HttpContextAccessor
-@model PagedResponseModel<cnpmnc.backend.DTOs.CourseDTOs.CourseDTO>
+@model PagedResponseModel<cnpmnc.backend.DTOs.AssignmentGradeDTOs.AssignmentGradeDTO>
 
 @{
     ViewData["Title"] = "Index";
@@ -15,12 +16,12 @@
 </script>
 }
 <div class="container-fluid">
-    <h1 class="mt-4">Danh sách khóa học</h1>
+    <h1 class="mt-4">Danh sách phân công</h1>
     <div class="card mb-12">
         <div class="card-header">
             <div class="row">
                 <div class="col-md-6 col-xs-12">
-                    <a class="btn btn-success" asp-action="CreateOrUpdate" asp-controller="Course">Tạo mới</a>
+                    <a class="btn btn-success" asp-action="CreateOrUpdate" asp-controller="AssignmentGrade">Tạo mới</a>
                 </div>
                 <div class="col-md-6 col-xs-12">
                     <form asp-action="Index" method="get">
@@ -54,16 +55,16 @@
                                 Tên khóa học
                             </th>
                             <th>
-                                Nội dung
+                                Tên giảng viên
                             </th>
                             <th>
-                                Chi tiết khóa học
+                                Ngày phân công
                             </th>
                             <th>
-                                Điều kiện học
+                                Note
                             </th>
                             <th>
-                                Học phí
+                                Trạng thái
                             </th>
                             <th></th>
                         </tr>
@@ -73,27 +74,31 @@
                         {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Name)
+                                    @Html.DisplayFor(modelItem => item.Course.Name)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Content)
+                                    @Html.DisplayFor(modelItem => item.Teacher.Name)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Detail)
+                                    @Convert.ToDateTime(item.AssignDate).ToString("dd/MM/yyyy")
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.StudyConditions)
+                                    @Html.DisplayFor(modelItem => item.Note)
                                 </td>
                                 <td>
-                                    @String.Format("{0:0,0}", item.Tuition)<span>đ</span>
+                                    @Html.DisplayFor(modelItem => item.State)
                                 </td>
                                 <td>
-                                    @Html.ActionLink("Sửa", "CreateOrUpdate", new { id = item.Id })|
-                                    @Html.ActionLink("Xem", "Details", new { id = item.Id })
-                                    @if (item.AssignmentGrades == null || !item.AssignmentGrades.Any())
+                                    @if (item.State == AssignmentGradeStateEnumDto.WaitingForAcceptance){
+
+                                        <text>@Html.ActionLink("Sửa", "CreateOrUpdate", new { id = item.Id }) |</text>
+                                    }
+                                        
+                                        @Html.ActionLink("Xem", "Details", new { id = item.Id })
+                                        @if (item.State == AssignmentGradeStateEnumDto.WaitingForAcceptance)
                                     {
-                                        <text>|</text>
-                                        @Html.ActionLink("Xóa", "Delete", new { id = item.Id })
+
+                                        <text>| @Html.ActionLink("Xóa", "Delete", new { id = item.Id })</text>
                                     }
                                 </td>
                             </tr>

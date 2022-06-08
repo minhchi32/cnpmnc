@@ -9,15 +9,11 @@ public class Account
     public string Username { get; set; }
     public string Password { get; set; }
     public AccountType AccountType { get; set; }
+    public string Address { get; set; }
     public string IdCard { get; set; }
     public int PhoneNumber { get; set; }
     public int LiteracyId { get; set; }
     public Literacy Literacy { get; set; }
-    public int? NumberOfHoursInClass { get; set; }
-    public int? ActualNumberOfHoursInClass { get; set; }
-    public int? NumberOfTeachingSessions { get; set; }
-    public int? NumberOfBreaks { get; set; }
-    public List<Grade>? Grades { get; set; }
-    public List<Assignment>? Assignments { get; set; }
-    public bool IsDeleted { get; set; }
+    public AccountStatusEnumDto Status { get; set; }
+    public List<AssignmentGrade>? AssignmentGrades { get; set; }
 }

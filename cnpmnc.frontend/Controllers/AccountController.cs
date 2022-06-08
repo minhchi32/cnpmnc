@@ -1,5 +1,4 @@
-﻿using cnpmnc.backend.DTOs.AssignmentDTOs;
-using cnpmnc.backend.DTOs.GradeDTOs;
+﻿using cnpmnc.backend.DTOs.AssignmentGradeDTOs;
 using cnpmnc.backend.DTOs.TeacherDTOs;
 using cnpmnc.frontend.Service;
 using cnpmnc.shared.Enums;
@@ -12,19 +11,16 @@ public class AccountController : Controller
 {
     private readonly ITeacherService _teacherService;
     private readonly ILiteracyService _literacyService;
-    private readonly IGradeService _gradeService;
-    private readonly IAssignmentService _assignmentService;
+    private readonly IAssignmentGradeService _assignmentGradeService;
 
     public AccountController(
         ITeacherService teacherService,
         ILiteracyService literacyService,
-        IGradeService gradeService,
-        IAssignmentService assignmentService)
+        IAssignmentGradeService assignmentGradeService)
     {
         _teacherService = teacherService;
         _literacyService = literacyService;
-        _gradeService = gradeService;
-        _assignmentService = assignmentService;
+        _assignmentGradeService = assignmentGradeService;
     }
 
 
@@ -96,27 +92,27 @@ public class AccountController : Controller
         ModelState.AddModelError("", "Cập nhật thông tin thất bại");
         return View(request);
     }
-    public async Task<IActionResult> ListGrade(string keyword, int page = 1, int limit = 5)
-    {
-        if (HttpContext.Session.GetString("User") == null)
-        {
-            return RedirectToAction("Index", "Authorize");
-        }
-        else
-        {
-            var request = new GradeQueryCriteria()
-            {
-                Search = keyword,
-                Limit = limit,
-                Page = page
-            };
-            var data = await _gradeService.GetByPageByIdAsync((int)HttpContext.Session.GetInt32("UserID"), request, new CancellationToken());
-            ViewBag.Keyword = keyword;
+    // public async Task<IActionResult> ListAssignmentGrade(string keyword, int page = 1, int limit = 5)
+    // {
+    //     if (HttpContext.Session.GetString("User") == null)
+    //     {
+    //         return RedirectToAction("Index", "Authorize");
+    //     }
+    //     else
+    //     {
+    //         var request = new GradeQueryCriteria()
+    //         {
+    //             Search = keyword,
+    //             Limit = limit,
+    //             Page = page
+    //         };
+    //         var data = await _assignmentGradeService.GetByPageByIdAsync((int)HttpContext.Session.GetInt32("UserID"), request, new CancellationToken());
+    //         ViewBag.Keyword = keyword;
 
-            return View(data);
-        }
-    }
-    public async Task<IActionResult> ListAssignment(string keyword, int page = 1, int limit = 5)
+    //         return View(data);
+    //     }
+    // }
+    public async Task<IActionResult> ListAssignmentGrade(string keyword, int page = 1, int limit = 5)
     {
         if (HttpContext.Session.GetString("User") == null)
         {
@@ -128,19 +124,19 @@ public class AccountController : Controller
             {
                 ViewBag.SuccessMsg = TempData["result"];
             }
-            var request = new AssignmentQueryCriteria()
+            var request = new AssignmentGradeQueryCriteria()
             {
                 Search = keyword,
                 Limit = limit,
                 Page = page
             };
-            var data = await _assignmentService.GetByPageByIdAsync((int)HttpContext.Session.GetInt32("UserID"), request, new CancellationToken());
+            var data = await _assignmentGradeService.GetByPageByIdAsync((int)HttpContext.Session.GetInt32("UserID"), request, new CancellationToken());
             ViewBag.Keyword = keyword;
 
             return View(data);
         }
     }
-    public async Task<IActionResult> RespondToAssignment(int assignmentId, AssignmentResponseEnumDto respond)
+    public async Task<IActionResult> RespondToAssignmentGrade(int assignmentGradeId, AssignmentGradeResponseEnumDto respond)
     {
         if (HttpContext.Session.GetString("User") == null)
         {
@@ -148,16 +144,16 @@ public class AccountController : Controller
         }
         else
         {
-            string result = respond == AssignmentResponseEnumDto.Accepted ? "Đồng ý" : "Hủy bỏ";
-            var data = await _assignmentService.RespondToAssignment((int)HttpContext.Session.GetInt32("UserID"), assignmentId, respond);
-            if (data.State!=AssignmentStateEnumDto.WaitingForAcceptance)
+            string result = respond == AssignmentGradeResponseEnumDto.Accepted ? "Đồng ý" : "Hủy bỏ";
+            var data = await _assignmentGradeService.RespondToAssignmentGrade((int)HttpContext.Session.GetInt32("UserID"), assignmentGradeId, respond);
+            if (data.State!=AssignmentGradeStateEnumDto.WaitingForAcceptance)
             {
                 TempData["result"] = $"{result} thành công";
-                return RedirectToAction("ListAssignment");
+                return RedirectToAction("ListAssignmentGrade");
             }
 
             ModelState.AddModelError("", $"{result} thất bại");
-            return RedirectToAction("ListAssignment");
+            return RedirectToAction("ListAssignmentGrade");
         }
     }
 

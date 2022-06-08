@@ -17,9 +17,10 @@ public static class AccountDataInitializer
                 Password = "1",
                 AccountType = AccountType.Admin,
                 IdCard = "1",
+                Address="abc123@gmail.com",
                 PhoneNumber = 1,
                 LiteracyId = 1,
-                IsDeleted = false,
+                Status = AccountStatusEnumDto.Active,
             },
             new Account
             {
@@ -29,13 +30,10 @@ public static class AccountDataInitializer
                 Password = "1",
                 AccountType = AccountType.Teacher,
                 IdCard = "1",
+                Address="abc123@gmail.com",
                 PhoneNumber = 1,
                 LiteracyId = 2,
-                NumberOfHoursInClass = 15,
-                ActualNumberOfHoursInClass = 15,
-                NumberOfTeachingSessions = 15,
-                NumberOfBreaks = 0,
-                IsDeleted = false,
+                Status = AccountStatusEnumDto.Active,
             },
             new Account
             {
@@ -45,13 +43,10 @@ public static class AccountDataInitializer
                 Password = "1",
                 AccountType = AccountType.Teacher,
                 IdCard = "1",
+                Address="abc123@gmail.com",
                 PhoneNumber = 1,
                 LiteracyId = 3,
-                NumberOfHoursInClass = 15,
-                ActualNumberOfHoursInClass = 15,
-                NumberOfTeachingSessions = 15,
-                NumberOfBreaks = 0,
-                IsDeleted = false,
+                Status = AccountStatusEnumDto.Active,
             },
             new Account
             {
@@ -61,13 +56,10 @@ public static class AccountDataInitializer
                 Password = "1",
                 AccountType = AccountType.Teacher,
                 IdCard = "1",
+                Address="abc123@gmail.com",
                 PhoneNumber = 1,
                 LiteracyId = 3,
-                NumberOfHoursInClass = 15,
-                ActualNumberOfHoursInClass = 15,
-                NumberOfTeachingSessions = 15,
-                NumberOfBreaks = 0,
-                IsDeleted = false,
+                Status = AccountStatusEnumDto.Active,
             }
         );
     }

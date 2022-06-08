@@ -13,36 +13,31 @@ public class ApplicationDbContext : DbContext
         Configuration = configuration;
     }
     public DbSet<Account> Accounts { get; set; }
-    public DbSet<Certificate> Certificates { get; set; }
     public DbSet<Classroom> Classrooms { get; set; }
     public DbSet<Course> Courses { get; set; }
-    public DbSet<Grade> Grades { get; set; }
     public DbSet<Literacy> Literacies { get; set; }
     public DbSet<Schedule> Schedules { get; set; }
     public DbSet<SchoolShift> SchoolShifts { get; set; }
-    public DbSet<Assignment> Assignments { get; set; }
+    public DbSet<AssignmentGrade> AssignmentGrades { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfiguration(new AccountConfiguration());
-        modelBuilder.ApplyConfiguration(new CertificateConfiguration());
         modelBuilder.ApplyConfiguration(new ClassroomConfiguration());
         modelBuilder.ApplyConfiguration(new CourseConfiguration());
-        modelBuilder.ApplyConfiguration(new GradeConfiguration());
         modelBuilder.ApplyConfiguration(new LiteracyConfiguration());
         modelBuilder.ApplyConfiguration(new ScheduleConfiguration());
         modelBuilder.ApplyConfiguration(new SchoolShiftConfiguration());
-        modelBuilder.ApplyConfiguration(new AssignmentConfiguration());
+        modelBuilder.ApplyConfiguration(new AssignmentGradeConfiguration());
 
         //Seed Data
         modelBuilder.SeedAccountData();
-        modelBuilder.SeedCertificateData();
         modelBuilder.SeedClassroomData();
         modelBuilder.SeedCourseData();
-        modelBuilder.SeedGradeData();
         modelBuilder.SeedLiteracyData();
         modelBuilder.SeedScheduleData();
         modelBuilder.SeedSchoolShiftData();
+        modelBuilder.SeedAssignmentGradeData();
     }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

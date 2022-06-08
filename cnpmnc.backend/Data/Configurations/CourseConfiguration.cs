@@ -12,13 +12,10 @@ public class CourseConfiguration : IEntityTypeConfiguration<Course>
         builder.HasKey(b => b.Id);
         builder.Property(b => b.Id).UseMySqlIdentityColumn();
         builder.Property(b => b.Name).IsRequired();
-        builder.Property(b => b.Content).IsRequired();
-        builder.Property(b => b.Detail).IsRequired();
-        builder.Property(b => b.StartDate).IsRequired();
-        builder.Property(b => b.EndDate).IsRequired();
-        builder.Property(b => b.StudyConditions).IsRequired();
+        builder.Property(b => b.Content).HasDefaultValue("").IsRequired();
+        builder.Property(b => b.Detail).HasDefaultValue("").IsRequired();
+        builder.Property(b => b.StudyConditions).HasDefaultValue("").IsRequired();
         builder.Property(b => b.Tuition).IsRequired();
-        builder.Property(b => b.StudyConditions).IsRequired();
-        builder.Property(b => b.IsDeleted);
+        builder.Property(b => b.NumberOfLesson).HasDefaultValue(15).IsRequired();
     }
 }

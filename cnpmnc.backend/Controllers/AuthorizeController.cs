@@ -1,12 +1,7 @@
 using AutoMapper;
-using cnpmnc.backend.DTOs.AssignmentDTOs;
 using cnpmnc.backend.DTOs.AuthorizeDTOs;
-using cnpmnc.backend.DTOs.GradeDTOs;
 using cnpmnc.backend.Models;
-using cnpmnc.backend.Service;
-using cnpmnc.shared;
 using cnpmnc.shared.Interfaces;
-using EnsureThat;
 using Microsoft.AspNetCore.Mvc;
 using Rookie.AssetManagement.Validators;
 
@@ -63,11 +58,7 @@ public class AuthorizeController : ControllerBase
             IdCard = account.IdCard,
             PhoneNumber = account.PhoneNumber,
             LiteracyId = account.LiteracyId,
-            NumberOfHoursInClass = account.NumberOfHoursInClass,
-            ActualNumberOfHoursInClass = account.ActualNumberOfHoursInClass,
-            NumberOfTeachingSessions = account.NumberOfTeachingSessions,
-            NumberOfBreaks = account.NumberOfBreaks,
-            IsDeleted = account.IsDeleted,
+            Status = account.Status,
             Error = false,
             Message = "",
         };

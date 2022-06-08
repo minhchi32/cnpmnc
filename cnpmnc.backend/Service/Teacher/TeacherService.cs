@@ -52,10 +52,6 @@ class TeacherService : ITeacherService
         Ensure.Any.IsNotNull(request);
 
         var newTeacher = _mapper.Map<Account>(request);
-        newTeacher.NumberOfBreaks = 0;
-        newTeacher.NumberOfHoursInClass = 0;
-        newTeacher.NumberOfTeachingSessions = 0;
-        newTeacher.ActualNumberOfHoursInClass = 0;
         await _teacherRepository.Add(newTeacher);
         var result = await _teacherRepository.Entities.Where(x => x.Id == newTeacher.Id)
                                                         .Include(x => x.Literacy)
@@ -75,11 +71,11 @@ class TeacherService : ITeacherService
         {
             throw new NotFoundException("Not Found!");
         }
-        teacher.IsDeleted = true;
+        teacher.Status = AccountStatusEnumDto.Deleted;
 
         var teacherDelete = await _teacherRepository.Update(teacher);
 
-        return teacherDelete.IsDeleted;
+        return teacherDelete.Status == AccountStatusEnumDto.Deleted;
     }
 
     public async Task<List<TeacherDTO>> GetAll()
@@ -131,7 +127,7 @@ class TeacherService : ITeacherService
                 );
         }
         query = query.Where(x => x.AccountType == AccountType.Teacher);
-        query = query.Where(x => x.IsDeleted == false);
+        query = query.Where(x => x.Status != AccountStatusEnumDto.Deleted);
 
         return query.AsQueryable();
     }

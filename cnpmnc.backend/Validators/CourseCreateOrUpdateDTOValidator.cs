@@ -34,14 +34,6 @@ namespace Rookie.AssetManagement.Validators
                 .NotEmpty()
                 .WithMessage(x => string.Format(ErrorTypes.Common.RequiredError, nameof(x.Content)));
 
-            RuleFor(m => m.StartDate)
-                .NotNull()
-                .WithMessage(x => string.Format(ErrorTypes.Common.RequiredError, nameof(x.StartDate)));
-
-            RuleFor(m => m.EndDate)
-                .NotNull()
-                .WithMessage(x => string.Format(ErrorTypes.Common.RequiredError, nameof(x.EndDate)));
-
             RuleFor(m => m.StudyConditions)
                 .NotNull()
                 .WithMessage(x => string.Format(ErrorTypes.Common.RequiredError, nameof(x.StudyConditions)))

@@ -17,11 +17,8 @@ public class AccountConfiguration : IEntityTypeConfiguration<Account>
         builder.Property(b => b.Password).IsRequired();
         builder.Property(b => b.AccountType).HasDefaultValue(AccountType.Teacher).IsRequired();
         builder.Property(b => b.IdCard).IsRequired();
+        builder.Property(b => b.Address).IsRequired();
         builder.Property(b => b.PhoneNumber).IsRequired();
-        builder.Property(b => b.NumberOfHoursInClass);
-        builder.Property(b => b.ActualNumberOfHoursInClass);
-        builder.Property(b => b.NumberOfTeachingSessions);
-        builder.Property(b => b.NumberOfBreaks);
-        builder.Property(b => b.IsDeleted);
+        builder.Property(b => b.Status).HasDefaultValue(AccountStatusEnumDto.Active).IsRequired();
     }
 }

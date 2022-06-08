@@ -6,13 +6,10 @@ namespace cnpmnc.backend.Models
         public string Name { get; set; }
         public string Content { get; set; }
         public string Detail { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
         public string StudyConditions { get; set; }
         public int Tuition { get; set; }
-        public List<Grade> Grades { get; set; }
-        public List<Assignment> Assignments { get; set; }
-        public bool IsDeleted { get; set; }
+        public int NumberOfLesson { get; set; }
+        public List<AssignmentGrade> AssignmentGrades { get; set; }
     }
 }
 

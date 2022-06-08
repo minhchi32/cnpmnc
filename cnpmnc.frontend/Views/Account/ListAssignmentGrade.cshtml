@@ -1,0 +1,114 @@
+@using cnpmnc.shared
+@model PagedResponseModel<cnpmnc.backend.DTOs.AssignmentGradeDTOs.AssignmentGradeDTO>
+@using Microsoft.AspNetCore.Http
+@using cnpmnc.shared.Enums
+@inject IHttpContextAccessor HttpContextAccessor
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@section Scripts{
+<script>
+    setTimeout(function () {
+        $('#msgAlert').fadeOut('slow');
+    }, 2000);
+</script>
+}
+<div class="container-fluid">
+    <h1 class="mt-4">Danh sách phân công</h1>
+    <div class="card mb-12">
+        <div class="card-header">
+            <div class="row">
+                @if (ViewBag.SuccessMsg != null)
+                {
+                    <div id="msgAlert" class="alert alert-success" role="alert">
+                        @ViewBag.SuccessMsg
+                    </div>
+                }
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-xs-12">
+                    <form asp-action="ListAssignmentGrade" method="get">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <input type="text" value="@ViewBag.Keyword" name="keyword" class="form-control" />
+                            </div>
+                            <div class="col-md-3">
+                                <button type="submit" class="btn btn-primary">Tìm</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>
+                                Tên khóa học
+                            </th>
+                            <th>
+                                Ngày phân công
+                            </th>
+                            <th>
+                                Lịch dạy
+                            </th>
+                            <th>Trạng thái</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Items)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Course.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.AssignDate)
+                                </td>
+                                <td></td>
+                                <td>@switch (item.State)
+                                    {
+                                        case AssignmentGradeStateEnumDto.WaitingForAcceptance:
+                                            <text>
+                                                Waiting for Acceptance
+                                            </text>
+                                            break;
+                                        case AssignmentGradeStateEnumDto.Accepted:
+                                            <text>
+                                                Accepted
+                                            </text>
+                                            break;
+                                        case AssignmentGradeStateEnumDto.Declined:
+                                            <text>
+                                                Declined
+                                            </text>
+                                            break;
+                                    }
+                                </td>
+                                @if (item.State == AssignmentGradeStateEnumDto.WaitingForAcceptance)
+                                {
+                                    <td>
+                                        <a style="text-decoration:none" href="@Url.ActionLink("RespondToAssignmentGrade","Account", new { assignmentGradeId=item.Id,
+                                    respond=AssignmentGradeResponseEnumDto.Accepted })">
+                                            <i class="fa-solid fa-check text-success"></i>
+                                        </a>
+                                        <text>|</text>
+                                        <a style="text-decoration:none" href="@Url.ActionLink("RespondToAssignmentGrade","Account", new { assignmentGradeId=item.Id,
+                                    respond=AssignmentGradeResponseEnumDto.Declined })">
+                                            <i class="fa-solid fa-xmark text-danger"></i>
+                                        </a>
+                                    </td>
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            @await Component.InvokeAsync("Pager", Model)
+        </div>
+    </div>
+</div>

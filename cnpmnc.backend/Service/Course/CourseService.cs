@@ -28,7 +28,8 @@ class CourseService : ICourseService
 
         var query = Filter(
             _courseRepository.Entities.AsQueryable(),
-            queryCriteria);
+            queryCriteria)
+            .Include(x=>x.AssignmentGrades);
 
         var courses = await query
             .AsNoTracking()
@@ -87,11 +88,12 @@ class CourseService : ICourseService
         {
             throw new NotFoundException("Not Found!");
         }
-        course.IsDeleted = true;
-
-        var courseDelete = await _courseRepository.Update(course);
-
-        return courseDelete.IsDeleted;
+        if (course.AssignmentGrades == null || course.AssignmentGrades.Any())
+        {
+            var courseDelete = await _courseRepository.Delete(course);
+            return true;
+        }
+        return false;
     }
 
     public async Task<List<CourseDTO>> GetAll()
@@ -122,7 +124,6 @@ class CourseService : ICourseService
                 b.Name.Contains(queryCriteria.Search)
                 );
         }
-        query = query.Where(x => x.IsDeleted == false);
 
         return query.AsQueryable();
     }

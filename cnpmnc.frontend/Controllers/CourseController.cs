@@ -68,8 +68,6 @@ public class CourseController : Controller
                     Name = course.Name,
                     Content = course.Content,
                     Detail = course.Detail,
-                    StartDate = course.StartDate,
-                    EndDate = course.EndDate,
                     StudyConditions = course.StudyConditions,
                     Tuition = course.Tuition,
                 };

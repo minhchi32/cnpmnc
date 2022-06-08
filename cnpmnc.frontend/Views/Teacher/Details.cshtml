@@ -1,5 +1,5 @@
 ﻿@using cnpmnc.shared
-@model PagedResponseModel<cnpmnc.backend.DTOs.GradeDTOs.GradeDTO>
+@model PagedResponseModel<cnpmnc.backend.DTOs.AssignmentGradeDTOs.AssignmentGradeDTO>
 @using Microsoft.AspNetCore.Http
 @inject IHttpContextAccessor HttpContextAccessor
 
@@ -94,20 +94,21 @@ Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
                            @foreach (var item in Model.Items)
                            {
                            <tr>
-                              <td>
-                                 @Html.DisplayFor(modelItem => item.Name)
-                              </td>
+                              <td></td>
                               <td>
                                  @Html.DisplayFor(modelItem => item.Course.Name)
                               </td>
                               <td>
-                                 @Html.DisplayFor(modelItem => item.NumberOfSessions)
+                                 @Html.DisplayFor(modelItem => item.Course.NumberOfLesson)
                               </td>
                               <td>
                                  @Html.DisplayFor(modelItem => item.Total)
                               </td>
                               <td>
-                                 @Html.DisplayFor(modelItem => item.Schedules)
+                                 @Html.DisplayFor(modelItem => item.Total)
+                              </td>
+                              <td>
+                                 <a href="#">Lịch dạy</a>
                               </td>
                            </tr>
                            }

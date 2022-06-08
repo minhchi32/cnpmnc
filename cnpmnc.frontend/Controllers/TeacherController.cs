@@ -1,4 +1,4 @@
-﻿using cnpmnc.backend.DTOs.GradeDTOs;
+﻿using cnpmnc.backend.DTOs.AssignmentGradeDTOs;
 using cnpmnc.backend.DTOs.TeacherDTOs;
 using cnpmnc.frontend.Service;
 using Microsoft.AspNetCore.Mvc;
@@ -10,16 +10,16 @@ public class TeacherController : Controller
 {
     private readonly ITeacherService _teacherService;
     private readonly ILiteracyService _literacyService;
-    private readonly IGradeService _gradeService;
+    private readonly IAssignmentGradeService _assignmentGradeService;
 
     public TeacherController(
         ITeacherService teacherService,
         ILiteracyService literacyService,
-        IGradeService gradeService)
+        IAssignmentGradeService assignmentGradeService)
     {
         _teacherService = teacherService;
         _literacyService = literacyService;
-        _gradeService = gradeService;
+        _assignmentGradeService = assignmentGradeService;
     }
     public async Task<IActionResult> Index(string keyword, int page = 1, int limit = 5)
     {
@@ -144,13 +144,13 @@ public class TeacherController : Controller
             ViewBag.teacher = teacher;
             // return View(teacher);
 
-            var request = new GradeQueryCriteria()
+            var request = new AssignmentGradeQueryCriteria()
             {
                 Search = keyword,
                 Limit = limit,
                 Page = page
             };
-            var data = await _gradeService.GetByPageByIdAsync(id, request, new CancellationToken());
+            var data = await _assignmentGradeService.GetByPageByIdAsync(id, request, new CancellationToken());
             ViewBag.Keyword = keyword;
 
 

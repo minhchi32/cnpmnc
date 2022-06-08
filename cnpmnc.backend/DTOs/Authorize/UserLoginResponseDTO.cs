@@ -14,13 +14,8 @@ public class UserLoginResponseDTO
     public int PhoneNumber { get; set; }
     public int LiteracyId { get; set; }
     public Literacy Literacy { get; set; }
-    public int? NumberOfHoursInClass { get; set; }
-    public int? ActualNumberOfHoursInClass { get; set; }
-    public int? NumberOfTeachingSessions { get; set; }
-    public int? NumberOfBreaks { get; set; }
-    public List<Grade>? Grades { get; set; }
-    public List<Assignment>? Assignments { get; set; }
-    public bool IsDeleted { get; set; }
+    public List<AssignmentGrade>? AssignmentGrades { get; set; }
+    public AccountStatusEnumDto Status { get; set; }
     public string Token { get; set; }
     public bool Error { get; set; }
     public string Message { get; set; }

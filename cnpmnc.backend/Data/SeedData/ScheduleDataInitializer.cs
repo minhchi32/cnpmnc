@@ -11,7 +11,7 @@ public static class ScheduleDataInitializer
             new Schedule
             {
                 Id = 1,
-                GradeId = 1,
+                AssignmentGradeId = 1,
                 ClassroomId = 1,
                 SchoolShiftId = 1
             }
