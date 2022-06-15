@@ -2,7 +2,7 @@
 using cnpmnc.backend.Validators;
 using FluentValidation;
 
-namespace Rookie.AssetManagement.Validators
+namespace cnpmnc.backend.Validators
 {
     public class UserLoginDTOValidator : BaseValidator<UserLoginDTO>
     {

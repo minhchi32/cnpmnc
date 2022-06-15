@@ -55,10 +55,12 @@ public class AccountController : Controller
                 Id = teacher.Id,
                 Name = teacher.Name,
                 Username = teacher.Username,
+                Address = teacher.Address,
                 IdCard = teacher.IdCard,
                 PhoneNumber = teacher.PhoneNumber,
                 LiteracyId = teacher.LiteracyId,
             };
+            ViewBag.Literacy = teacher.Literacy.Name;
             return View(teacherCreateOrUpdateDTO);
         }
     }
@@ -79,7 +81,7 @@ public class AccountController : Controller
                 Value = item.Id.ToString()
             });
         }
-        ViewBag.Literacy = literacies;
+        ViewBag.Literacy = teacher.Literacy.Name;
         if (!ModelState.IsValid)
             return View(request);
         var result = await _teacherService.CreateOrUpdate(request, request.Id);

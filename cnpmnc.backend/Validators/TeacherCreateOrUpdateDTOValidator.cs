@@ -3,7 +3,7 @@ using cnpmnc.backend.Validators;
 using cnpmnc.shared.Constants;
 using FluentValidation;
 
-namespace Rookie.AssetManagement.Validators
+namespace cnpmnc.backend.Validators
 {
     public class TeacherCreateOrUpdateDTOValidator : BaseValidator<TeacherCreateOrUpdateDTO>
     {
@@ -15,21 +15,16 @@ namespace Rookie.AssetManagement.Validators
                 .WithMessage(x => string.Format(ErrorTypes.Common.RequiredError, nameof(x.Name)))
                 .NotEmpty()
                 .WithMessage(x => string.Format(ErrorTypes.Common.RequiredError, nameof(x.Name)));
-            RuleFor(m => m.Username)
-                .NotNull()
-                .WithMessage(x => string.Format(ErrorTypes.Common.RequiredError, nameof(x.Username)))
-                .NotEmpty()
-                .WithMessage(x => string.Format(ErrorTypes.Common.RequiredError, nameof(x.Username)));
-            RuleFor(m => m.Password)
-                .NotNull()
-                .WithMessage(x => string.Format(ErrorTypes.Common.RequiredError, nameof(x.Password)))
-                .NotEmpty()
-                .WithMessage(x => string.Format(ErrorTypes.Common.RequiredError, nameof(x.Password)));
             RuleFor(m => m.IdCard)
                 .NotNull()
                 .WithMessage(x => string.Format(ErrorTypes.Common.RequiredError, nameof(x.IdCard)))
                 .NotEmpty()
                 .WithMessage(x => string.Format(ErrorTypes.Common.RequiredError, nameof(x.IdCard)));
+            RuleFor(m => m.Address)
+                .NotNull()
+                .WithMessage(x => string.Format(ErrorTypes.Common.RequiredError, nameof(x.Address)))
+                .NotEmpty()
+                .WithMessage(x => string.Format(ErrorTypes.Common.RequiredError, nameof(x.Address)));
             RuleFor(m => m.PhoneNumber)
                 .NotNull()
                 .WithMessage(x => string.Format(ErrorTypes.Common.RequiredError, nameof(x.PhoneNumber)))

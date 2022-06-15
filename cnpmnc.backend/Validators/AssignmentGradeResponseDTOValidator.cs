@@ -3,7 +3,7 @@ using cnpmnc.backend.Validators;
 using cnpmnc.shared.Constants;
 using FluentValidation;
 
-namespace Rookie.AssetManagement.Validators
+namespace cnpmnc.backend.Validators
 {
     public class AssignmentGradeResponseDTOValidator : BaseValidator<AssignmentGradeResponseDTO>
     {

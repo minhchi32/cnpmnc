@@ -37,7 +37,7 @@ namespace cnpmnc.backend
             CreateMap<TeacherCreateOrUpdateDTO, Account>()
                 .ForMember(src => src.Name, act => act.MapFrom(dest => dest.Name))
                 .ForMember(src => src.Username, act => act.MapFrom(dest => dest.Username))
-                .ForMember(src => src.Password, act => act.MapFrom(dest => dest.Password))
+                .ForMember(src => src.Address, act => act.MapFrom(dest => dest.Address))
                 .ForMember(src => src.IdCard, act => act.MapFrom(dest => dest.IdCard))
                 .ForMember(src => src.PhoneNumber, act => act.MapFrom(dest => dest.PhoneNumber))
                 .ForMember(src => src.LiteracyId, act => act.MapFrom(dest => dest.LiteracyId))

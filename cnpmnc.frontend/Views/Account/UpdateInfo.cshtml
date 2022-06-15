@@ -20,8 +20,8 @@
                 <form asp-action="UpdateInfo" enctype="multipart/form-data" method="post">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                        <input type="hidden" asp-for="Id" />
-                        <input type="hidden" asp-for="Password" />
+                    <input type="hidden" asp-for="Id" />
+                    <input type="hidden" asp-for="LiteracyId" />
 
                     <div class="form-group">
                         <label asp-for="Name" class="control-label"></label>
@@ -33,15 +33,15 @@
                         <input asp-for="Username" class="form-control" readonly />
                         <span asp-validation-for="Username" class="text-danger"></span>
                     </div>
-                    @* <div class="form-group">
-                        <label asp-for="Password" class="control-label"></label>
-                        <input asp-for="Password" class="form-control" type="password"/>
-                        <span asp-validation-for="Password" class="text-danger"></span>
-                    </div> *@
                     <div class="form-group">
                         <label asp-for="IdCard" class="control-label"></label>
                         <input asp-for="IdCard" class="form-control" />
                         <span asp-validation-for="IdCard" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Address" class="control-label"></label>
+                        <input asp-for="Address" class="form-control" />
+                        <span asp-validation-for="Address" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="PhoneNumber" class="control-label"></label>
@@ -50,10 +50,7 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="LiteracyId" class="control-label"></label>
-                        <select asp-for="LiteracyId" asp-items="@ViewBag.Literacy" class="form-control" readonly>
-                            <option>Please select one</option>
-                        </select>
-                        <span asp-validation-for="LiteracyId" class="text-danger"></span>
+                        <input class="form-control" value="@ViewBag.Literacy" readonly/>
                     </div>
                     <div class="form-group">
                         <input type="submit" value="Lưu" class="btn btn-primary" />

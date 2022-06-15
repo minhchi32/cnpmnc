@@ -26,7 +26,7 @@ public static class AccountDataInitializer
             {
                 Id = 2,
                 Name = "Nguyễn Van A",
-                Username = "gv1",
+                Username = "gv0001",
                 Password = "1",
                 AccountType = AccountType.Teacher,
                 IdCard = "1",
@@ -39,7 +39,7 @@ public static class AccountDataInitializer
             {
                 Id = 3,
                 Name = "Nguyễn Văn B",
-                Username = "gv2",
+                Username = "gv0002",
                 Password = "1",
                 AccountType = AccountType.Teacher,
                 IdCard = "1",
@@ -52,7 +52,7 @@ public static class AccountDataInitializer
             {
                 Id = 4,
                 Name = "Nguyễn Văn C",
-                Username = "gv3",
+                Username = "gv0003",
                 Password = "1",
                 AccountType = AccountType.Teacher,
                 IdCard = "1",

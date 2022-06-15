@@ -52,6 +52,12 @@ class TeacherService : ITeacherService
         Ensure.Any.IsNotNull(request);
 
         var newTeacher = _mapper.Map<Account>(request);
+        newTeacher.Status = AccountStatusEnumDto.Active;
+        newTeacher.AccountType = AccountType.Teacher;
+        var username = GenerateUsernameExtension.GenerateUsername(_teacherRepository);
+        newTeacher.Username = username;
+        newTeacher.Password = username;
+
         await _teacherRepository.Add(newTeacher);
         var result = await _teacherRepository.Entities.Where(x => x.Id == newTeacher.Id)
                                                         .Include(x => x.Literacy)

@@ -70,6 +70,7 @@ public class TeacherController : Controller
                 });
             }
             ViewBag.Literacy = literacies;
+            ViewBag.Username = "abc";
             if (id == null)
             {
                 return View();
@@ -85,9 +86,10 @@ public class TeacherController : Controller
                 TeacherCreateOrUpdateDTO teacherCreateOrUpdateDTO = new TeacherCreateOrUpdateDTO()
                 {
                     Id = teacher.Id,
-                    Name = teacher.Name,
                     Username = teacher.Username,
+                    Name = teacher.Name,
                     IdCard = teacher.IdCard,
+                    Address = teacher.Address,
                     PhoneNumber = teacher.PhoneNumber,
                     LiteracyId = teacher.LiteracyId,
                 };
@@ -105,7 +107,7 @@ public class TeacherController : Controller
         ViewBag.IsEdit = id == null ? false : true;
         bool IsTeacherExist = false;
         TeacherDTO teacher = await _teacherService.GetById(id);
-
+        ViewBag.Username = "abc";
         if (teacher != null)
         {
             IsTeacherExist = true;
@@ -114,7 +116,7 @@ public class TeacherController : Controller
         {
             teacher = new TeacherDTO();
         }
-
+        //request.Username = "";
         if (!ModelState.IsValid)
             return View(request);
         var result = IsTeacherExist ? await _teacherService.CreateOrUpdate(request, request.Id)

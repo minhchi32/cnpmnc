@@ -3,7 +3,7 @@ using cnpmnc.backend.Service;
 using cnpmnc.shared;
 using EnsureThat;
 using Microsoft.AspNetCore.Mvc;
-using Rookie.AssetManagement.Validators;
+using cnpmnc.backend.Validators;
 
 namespace cnpmnc.backend.Controllers;
 

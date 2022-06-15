@@ -3,7 +3,7 @@ using cnpmnc.backend.DTOs.AuthorizeDTOs;
 using cnpmnc.backend.Models;
 using cnpmnc.shared.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Rookie.AssetManagement.Validators;
+using cnpmnc.backend.Validators;
 
 namespace cnpmnc.backend.Controllers;
 
